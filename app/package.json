@@ -1,0 +1,13 @@
+{
+  "name": "ludumdare-29",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express.io": "1.1.x",
+    "express3-handlebars": "0.5.x",
+    "mysql": "2.1.x"
+  }
+}
