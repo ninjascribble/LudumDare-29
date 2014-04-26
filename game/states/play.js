@@ -1,4 +1,5 @@
 var Mole = require('../prefabs/mole');
+var Player = require('../prefabs/player.js');
 
 'use strict';
 function Play() {
@@ -13,8 +14,7 @@ function calculatePos(i, n, length) {
 }
 
 Play.prototype = {
-
-  create: function() {
+  create: function () {
 
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -25,13 +25,15 @@ Play.prototype = {
         this.game.add.existing(this.moles[0]);
       }
     }
+
+    this.player = new Player(this.game, this.game.width / 2, this.game.height / 2, 14);
   },
   
-  update: function() {
+  update: function () {
 
   },
   
-  clickListener: function() {
+  clickListener: function () {
     // this.game.state.start('gameover');
   }
 };
