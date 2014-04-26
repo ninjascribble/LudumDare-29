@@ -30,11 +30,14 @@ Play.prototype = {
     this.player = new Player(this.game, this.game.width / 2, this.game.height / 2, 1);
     this.hud = new Hud(this.game);
   },
-  
+
   update: function () {
     this.game.physics.arcade.collide(this.player, this.moles);
   },
-  
+  render: function () {
+    //this.game.debug.text('angle: ' + this.player.angleToPointer, 20, 20)
+  },
+
   clickListener: function () {
     // this.game.state.start('gameover');
   }

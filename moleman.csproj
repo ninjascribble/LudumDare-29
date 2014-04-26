@@ -57,6 +57,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\enemies\mole.png" />
     <Content Include="assets\enemies\moleBlue_down.png" />
     <Content Include="assets\enemies\moleBlue_up.png" />
     <Content Include="assets\enemies\moleGreen_down.png" />
@@ -65,15 +66,19 @@
     <Content Include="assets\enemies\moleRed_up.png" />
     <Content Include="assets\enemies\moleYellow_down.png" />
     <Content Include="assets\enemies\moleYellow_up.png" />
+    <Content Include="assets\fonts\8bit_wonder-light.png" />
     <Content Include="assets\Items\bomb.png" />
-    <Content Include="assets\Items\bombFlash.png" />
     <Content Include="assets\Items\rock.png" />
+    <Content Include="assets\fonts\8bit_wonder-light.fnt" />
     <None Include="assets\player\playerOne.json" />
     <Content Include="assets\player\playerOne.png" />
     <Content Include="assets\preloader.gif" />
     <Content Include="assets\yeoman-logo.png" />
     <Content Include="css\styles.css" />
     <Content Include="game\main.js" />
+    <Content Include="game\prefabs\bomb.js" />
+    <Content Include="game\prefabs\hud.js" />
+    <Content Include="game\prefabs\mole.js" />
     <Content Include="game\prefabs\player.js" />
     <Content Include="game\states\boot.js" />
     <Content Include="game\states\gameover.js" />

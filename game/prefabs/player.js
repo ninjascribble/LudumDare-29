@@ -1,6 +1,7 @@
 'use strict';
+var Bomb = require('../prefabs/bomb.js');
 
-var Player = function(game, x, y, frame) {
+var Player = function (game, x, y, frame) {
   Phaser.Sprite.call(this, game, x, y, 'player', frame);
   // initialize your prefab here
 
@@ -32,9 +33,19 @@ var Player = function(game, x, y, frame) {
 Player.prototype = Object.create(Phaser.Sprite.prototype);
 Player.prototype.constructor = Player;
 
-Player.prototype.update = function() {
+Player.prototype.update = function () {
   this.body.velocity.x = 0;
   this.body.velocity.y = 0;
+
+  // determine facing from mouse position
+  this.angleToPointer = this.game.physics.arcade.angleToPointer(this, this.game.input.mousePointer);
+  if (this.angleToPointer > -1.5 && this.angleToPointer < 1.5) {
+    this.scale.x = 1;
+  } else {
+    this.scale.x = -1;
+  }
+
+
 
   if (this.cursors.up.isDown) {
     this.body.velocity.y = -this.speed;
@@ -43,11 +54,9 @@ Player.prototype.update = function() {
     this.body.velocity.y = this.speed;
   }
   if (this.cursors.left.isDown) {
-    this.scale.x = -1;
     this.body.velocity.x = -this.speed;
   }
   if (this.cursors.right.isDown) {
-    this.scale.x = 1;
     this.body.velocity.x = this.speed;
   }
 
