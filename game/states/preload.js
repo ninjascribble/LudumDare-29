@@ -12,8 +12,17 @@ Preload.prototype = {
 
     this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
     this.load.setPreloadSprite(this.asset);
-    this.load.image('yeoman', 'assets/yeoman-logo.png');
+
+	// player
     this.load.atlas('player', 'assets/player/playerOne.png', 'assets/player/playerOne.json');
+
+    // items
+    this.load.image('bomb', 'assets/items/bomb.png');
+    this.load.image('bombFlash', 'assets/items/bombFlash.png');
+    this.load.image('rock', 'assets/items/rock.png');
+
+    // enemies
+    this.load.spritesheet('mole', 'assets/enemies/mole.png', 70, 70);
   },
   create: function () {
     this.asset.cropEnabled = false;
@@ -23,6 +32,7 @@ Preload.prototype = {
       this.game.state.start('menu');
     }
   },
+
   onLoadComplete: function () {
     this.ready = true;
   }
