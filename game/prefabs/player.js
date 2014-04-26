@@ -24,10 +24,8 @@ var Player = function (game, x, y, frame) {
   this.animations.add('walk', ['p1_walk01', 'p1_walk02', 'p1_walk03', 'p1_walk04', 'p1_walk05', 'p1_walk06', 'p1_walk07', 'p1_walk09', 'p1_walk10', 'p1_walk11', ], 12, true);
   this.anchor.setTo(0.5, .8);
   this.speed = 150;
-  this.body.width = 65;
-  this.body.height = 25;
   this.body.collideWorldBounds = true;
-  this.body.x = 20;
+  this.body.setSize(40, 30, 0, 10);
 };
 
 Player.prototype = Object.create(Phaser.Sprite.prototype);
@@ -35,7 +33,7 @@ Player.prototype.constructor = Player;
 
 Player.prototype.update = function () {
 
-  this.game.debug.spriteBounds(this, 'rgba(255,0,0,.4)');
+  // this.game.debug.spriteBounds(this, 'rgba(255,0,0,.4)');
 
   this.body.velocity.x = 0;
   this.body.velocity.y = 0;

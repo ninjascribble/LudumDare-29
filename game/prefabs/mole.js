@@ -28,13 +28,14 @@ Mole.prototype.create = function() {
   this.game.add.existing(this);
   this.anchor.setTo(0.5, 0.5);
   this.body.immovable = true;
+  this.body.setSize(110, 110, 0, 15);
   this.frame = 0;
 
   this.game.time.events.add(this.initialDelay, appear, this);
 }
 
 Mole.prototype.update = function() {
-  this.game.debug.spriteBounds(this);
+  // this.game.debug.spriteBounds(this);
 };
 
 function appear() {
