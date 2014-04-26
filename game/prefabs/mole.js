@@ -2,6 +2,7 @@
 
 var Mole = function(game, x, y, frame) {
   Phaser.Sprite.call(this, game, x, y, 'mole', frame);
+  this.game.add.existing(this);
   this.anchor.setTo(0.5, 0.5);
   this.frequency = Math.random() * 600 + 800;
   this.lastUpdated = Date.now();
