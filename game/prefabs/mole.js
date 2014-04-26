@@ -2,6 +2,8 @@
 
 var Mole = function(game, x, y, frame) {
   Phaser.Sprite.call(this, game, x, y, 'mole', frame);
+  this.game.physics.arcade.enableBody(this);
+  this.body.immovable = true;
   this.game.add.existing(this);
   this.anchor.setTo(0.5, 0.5);
   this.game.time.events.loop(Math.random() * 600 + 800, onTimerTick, this);
