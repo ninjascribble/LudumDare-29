@@ -23,6 +23,9 @@ Preload.prototype = {
 
     // enemies
     this.load.spritesheet('mole', 'assets/enemies/mole.png', 70, 70);
+
+    // fonts
+    this.load.bitmapFont('8bit-light', 'assets/fonts/8bit_wonder-light.png', 'assets/fonts/8bit_wonder-light.fnt');
   },
   create: function () {
     this.asset.cropEnabled = false;
