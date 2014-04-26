@@ -27,10 +27,11 @@ Play.prototype = {
       }
     }
 
-    this.player = new Player(this.game, this.game.width / 2, this.game.height / 2, 14);
+    this.player = new Player(this.game, this.game.width / 2, this.game.height / 2, 1);
   },
   
   update: function () {
+
 
   },
   
