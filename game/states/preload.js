@@ -22,7 +22,7 @@ Preload.prototype = {
     this.load.image('rock', 'assets/items/rock.png');
 
     // enemies
-    this.load.spritesheet('mole', 'assets/enemies/mole.png', 70, 70);
+    this.load.spritesheet('mole', 'assets/enemies/mole-140.png', 140, 140);
 
     // fonts
     this.load.bitmapFont('8bit-light', 'assets/fonts/8bit_wonder-light.png', 'assets/fonts/8bit_wonder-light.fnt');

@@ -5,8 +5,8 @@ var Player = require('../prefabs/player.js');
 'use strict';
 function Play() {
   this.moles = [];
-  this.molesPerRow = 4;
-  this.molesPerColumn = 4;
+  this.molesPerRow = 3;
+  this.molesPerColumn = 3;
 }
 
 function calculatePos(i, n, length) {
@@ -27,7 +27,7 @@ Play.prototype = {
       }
     }
 
-    this.player = new Player(this.game, this.game.width / 2, this.game.height / 2, 1);
+    this.player = new Player(this.game, this.game.width / 3, this.game.height / 3, 1);
     this.hud = new Hud(this.game);
   },
 
