@@ -57,12 +57,43 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\enemies\moleBlue_down.png" />
+    <Content Include="assets\enemies\moleBlue_up.png" />
+    <Content Include="assets\enemies\moleGreen_down.png" />
+    <Content Include="assets\enemies\moleGreen_up.png" />
+    <Content Include="assets\enemies\moleRed_down.png" />
+    <Content Include="assets\enemies\moleRed_up.png" />
+    <Content Include="assets\enemies\moleYellow_down.png" />
+    <Content Include="assets\enemies\moleYellow_up.png" />
+    <Content Include="assets\Items\bomb.png" />
+    <Content Include="assets\Items\bombFlash.png" />
+    <Content Include="assets\Items\rock.png" />
+    <None Include="assets\player\playerOne.json" />
+    <Content Include="assets\player\playerOne.png" />
+    <Content Include="assets\preloader.gif" />
+    <Content Include="assets\yeoman-logo.png" />
+    <Content Include="css\styles.css" />
+    <Content Include="game\main.js" />
+    <Content Include="game\prefabs\player.js" />
+    <Content Include="game\states\boot.js" />
+    <Content Include="game\states\gameover.js" />
+    <Content Include="game\states\menu.js" />
+    <Content Include="game\states\play.js" />
+    <Content Include="game\states\preload.js" />
+    <Content Include="Gruntfile.js" />
+    <Content Include="index.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".bowerrc" />
+    <Content Include=".editorconfig" />
+    <Content Include=".gitignore" />
+    <Content Include=".jshintrc" />
+    <Content Include="bower.json" />
+    <Content Include="config.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

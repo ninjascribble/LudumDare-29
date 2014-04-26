@@ -5,10 +5,10 @@ function Boot() {
 }
 
 Boot.prototype = {
-  preload: function() {
+  preload: function () {
     this.load.image('preloader', 'assets/preloader.gif');
   },
-  create: function() {
+  create: function () {
     this.game.input.maxPointers = 1;
     this.game.state.start('preload');
   }
