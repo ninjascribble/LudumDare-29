@@ -2,4 +2,10 @@ node_modules
 bower_components
 dist
 *.log
+bin
+obj
+*.user
+*.suo
+Web.Release.config
+Web.Debug.config
 .DS_Store
