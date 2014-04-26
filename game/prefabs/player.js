@@ -14,7 +14,9 @@ var Player = function(game, x, y, frame) {
     right: game.input.keyboard.addKey(Phaser.Keyboard.D)
   };
 
-  this.speed = 100;
+  this.animations.add('walk', ['p1_walk01', 'p1_walk02', 'p1_walk03', 'p1_walk04', 'p1_walk05', 'p1_walk06', 'p1_walk07', 'p1_walk09', 'p1_walk10', 'p1_walk11', ], 12, true);
+  this.anchor.setTo(0.5, 0.5);
+  this.speed = 150;
 };
 
 Player.prototype = Object.create(Phaser.Sprite.prototype);
@@ -31,12 +33,20 @@ Player.prototype.update = function() {
     this.body.velocity.y = this.speed;
   }
   if (this.cursors.left.isDown) {
+    this.scale.x = -1;
     this.body.velocity.x = -this.speed;
   }
   if (this.cursors.right.isDown) {
+    this.scale.x = 1;
     this.body.velocity.x = this.speed;
   }
 
+  if (this.body.velocity.x || this.body.velocity.y) {
+    this.animations.play('walk');
+  } else {
+    this.animations.stop();
+    this.frame = 12;
+  }
 };
 
 module.exports = Player;
