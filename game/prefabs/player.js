@@ -18,6 +18,15 @@ var Player = function (game, x, y, frame) {
   this.animations.add('walk', ['p1_walk01', 'p1_walk02', 'p1_walk03', 'p1_walk04', 'p1_walk05', 'p1_walk06', 'p1_walk07', 'p1_walk09', 'p1_walk10', 'p1_walk11', ], 12, true);
   this.anchor.setTo(0.5, 0.5);
   this.speed = 150;
+  this.bombCooldown = 1000; // only one bomb per second, no bomb spamming
+  this.bombCooldownActive = false; 
+  this.bombs = game.add.group(); // how many bombs are in the world
+  this.maxActiveBombs = 2; // how many bombs can coexist at one time
+
+  for (var i = 0; i < this.maxActiveBombs; i++) {
+    var bomb = new Bomb(this.game, this.body.x, this.body.y, 0);
+    this.bombs.add(bomb);
+  }
 };
 
 Player.prototype = Object.create(Phaser.Sprite.prototype);
@@ -35,7 +44,13 @@ Player.prototype.update = function () {
     this.scale.x = -1;
   }
 
-
+  // throw a bomb but respect the cooldown and active bomb count
+  if (this.game.input.mousePointer.isDown && !this.bombCooldownActive && this.bombs.countLiving() < this.maxActiveBombs) {
+    this.bombCooldownActive = true;
+    var bomb = this.bombs.getFirstDead();
+    bomb.throw(this.body.x, this.body.y);
+    this.bombCooldownEvent = this.game.time.events.add(this.bombCooldown, onTimerTick, this);
+  }
 
   if (this.cursors.up.isDown) {
     this.body.velocity.y = -this.speed;
@@ -57,5 +72,10 @@ Player.prototype.update = function () {
     this.frame = 12;
   }
 };
+
+function onTimerTick() {
+  this.bombCooldownActive = false;
+  this.game.time.events.remove(this.bombCooldownEvent);
+}
 
 module.exports = Player;
