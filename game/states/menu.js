@@ -7,15 +7,17 @@ Menu.prototype = {
 
   },
   create: function() {
-    var style = { font: '65px Arial', fill: '#ffffff', align: 'center'};
+
     this.sprite = this.game.add.sprite(this.game.world.centerX, 138, 'rock');
     this.sprite.anchor.setTo(0.5, 0.7);
 
-    this.titleText = this.game.add.text(this.game.world.centerX, 300, 'Ludum Dare 29!', style);
-    this.titleText.anchor.setTo(0.5, 0.5);
+    this.titleText = this.game.add.bitmapText(this.game.world.centerX, 300, '8bit-light', 'Ludum Dare 29!', 48);
+    this.titleText.updateTransform();
+    this.titleText.x = this.game.width / 2 - this.titleText.textWidth / 2;
 
-    this.instructionsText = this.game.add.text(this.game.world.centerX, 400, 'Click anywhere to play', { font: '16px Arial', fill: '#ffffff', align: 'center'});
-    this.instructionsText.anchor.setTo(0.5, 0.5);
+    this.instructionsText = this.game.add.bitmapText(this.game.world.centerX, 400, '8bit-light', 'Click anywhere to play', 16);
+    this.instructionsText.updateTransform();
+    this.instructionsText.x = this.game.width / 2 - this.instructionsText.textWidth / 2;
 
     this.sprite.angle = -20;
     this.game.add.tween(this.sprite).to({angle: 20}, 1000, Phaser.Easing.Linear.NONE, true, 0, 1000, true);

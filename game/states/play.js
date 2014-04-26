@@ -18,6 +18,7 @@ Play.prototype = {
 
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
+    // Create a grid of moles
     for (var i = 0, len = this.molesPerRow; i < len; i++) {
       for (var j = 0, len = this.molesPerColumn; j < len; j++) {
         this.moles.unshift(new Mole(this.game, calculatePos(i + 1, this.molesPerRow, this.game.width), calculatePos(j + 1, this.molesPerColumn, this.game.height)));
