@@ -29,12 +29,15 @@ Play.prototype = {
 
     this.player = new Player(this.game, this.game.width / 2, this.game.height / 2, 1);
   },
-  
+
   update: function () {
 
 
   },
-  
+  render: function () {
+    //this.game.debug.text('angle: ' + this.player.angleToPointer, 20, 20)
+  },
+
   clickListener: function () {
     // this.game.state.start('gameover');
   }

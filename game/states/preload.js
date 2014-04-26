@@ -13,11 +13,11 @@ Preload.prototype = {
     this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
     this.load.setPreloadSprite(this.asset);
 
-	// player
+    // player
     this.load.atlas('player', 'assets/player/playerOne.png', 'assets/player/playerOne.json');
 
     // items
-    this.load.image('bomb', 'assets/items/bomb.png');
+    this.load.spritesheet('bomb', 'assets/items/bomb.png', 70, 70);
     this.load.image('bombFlash', 'assets/items/bombFlash.png');
     this.load.image('rock', 'assets/items/rock.png');
 
