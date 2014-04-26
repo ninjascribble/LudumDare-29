@@ -5,18 +5,24 @@ var Player = function (game, x, y, frame) {
   Phaser.Sprite.call(this, game, x, y, 'player', frame);
   // initialize your prefab here
 
-  game.add.existing(this);
-  game.physics.arcade.enable(this);
+  this.game.add.existing(this);
+  this.game.physics.arcade.enable(this);
+  this.game.physics.arcade.enableBody(this);
+  this.game.add.existing(this);
 
   this.cursors = {
-    up: game.input.keyboard.addKey(Phaser.Keyboard.W),
-    down: game.input.keyboard.addKey(Phaser.Keyboard.S),
-    left: game.input.keyboard.addKey(Phaser.Keyboard.A),
-    right: game.input.keyboard.addKey(Phaser.Keyboard.D)
+    // up: game.input.keyboard.addKey(Phaser.Keyboard.W),
+    // down: game.input.keyboard.addKey(Phaser.Keyboard.S),
+    // left: game.input.keyboard.addKey(Phaser.Keyboard.A),
+    // right: game.input.keyboard.addKey(Phaser.Keyboard.D)
+    up: game.input.keyboard.addKey(Phaser.Keyboard.UP),
+    down: game.input.keyboard.addKey(Phaser.Keyboard.DOWN),
+    left: game.input.keyboard.addKey(Phaser.Keyboard.LEFT),
+    right: game.input.keyboard.addKey(Phaser.Keyboard.RIGHT)
   };
 
   this.animations.add('walk', ['p1_walk01', 'p1_walk02', 'p1_walk03', 'p1_walk04', 'p1_walk05', 'p1_walk06', 'p1_walk07', 'p1_walk09', 'p1_walk10', 'p1_walk11', ], 12, true);
-  this.anchor.setTo(0.5, 0.5);
+  this.anchor.setTo(0.5, .8);
   this.speed = 150;
   this.bombCooldown = 1000; // only one bomb per second, no bomb spamming
   this.bombCooldownActive = false; 
@@ -27,12 +33,19 @@ var Player = function (game, x, y, frame) {
     var bomb = new Bomb(this.game, this.body.x, this.body.y, 0);
     this.bombs.add(bomb);
   }
+  this.body.width = 65;
+  this.body.height = 25;
+  this.body.collideWorldBounds = true;
+  this.body.x = 20;
 };
 
 Player.prototype = Object.create(Phaser.Sprite.prototype);
 Player.prototype.constructor = Player;
 
 Player.prototype.update = function () {
+
+  this.game.debug.spriteBounds(this, 'rgba(255,0,0,.4)');
+
   this.body.velocity.x = 0;
   this.body.velocity.y = 0;
 
