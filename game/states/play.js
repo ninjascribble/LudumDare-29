@@ -4,7 +4,7 @@ var Player = require('../prefabs/player.js');
 
 'use strict';
 function Play() {
-  this.currentLevel = 0;
+  this.currentLevel = 1;
 }
 
 function calculatePos(i, n, length) {
@@ -15,6 +15,19 @@ function calculatePos(i, n, length) {
 Play.prototype = {
 
   create: function () {
+    this.game.physics.startSystem(Phaser.Physics.ARCADE);
+    this.buildLevel(this.currentLevel);
+  },
+
+  update: function () {
+    this.game.physics.arcade.collide(this.player, this.enemies);
+  },
+
+  render: function () {
+
+  },
+
+  buildLevel: function(level) {
 
     var levels = this.game.cache.getJSON('levels');
     var level = levels[this.currentLevel];
@@ -24,13 +37,11 @@ Play.prototype = {
     var player = level.player;
     var enemies = level.enemies;
 
-    this.game.physics.startSystem(Phaser.Physics.ARCADE);
     this.game.world.bounds = new Phaser.Rectangle(bounds.x, bounds.y, bounds.width, bounds.height);
 
-    this.hud = new Hud(this.game);
     this.game.add.sprite(background.x, background.y, background.name);
     this.enemies = new Phaser.Group(this.game, this.game.world, 'enemies');
-    this.player = new Player(this.game, this.game.width / 3, this.game.height / 3, 1);
+    this.player = new Player(this.game, player.x, player.y, 1);
     this.game.add.sprite(foreground.x, foreground.y, foreground.name);
 
     for (var i = 0, len = enemies.length; i < len; i++) {
@@ -40,23 +51,9 @@ Play.prototype = {
     this.game.sound.add('explosion1');
     this.game.sound.add('explosion2');
     this.game.sound.add('explosion3');
-  },
 
-  update: function () {
-    this.game.physics.arcade.collide(this.player, this.moles);
-  },
-  render: function () {
-    //this.game.debug.text('angle: ' + this.player.angleToPointer, 20, 20)
-  },
-
-  clickListener: function () {
-    // this.game.state.start('gameover');
+    this.hud = new Hud(this.game);
   }
 };
-
-function fuckyeah() {
-  console.log('fuckin\' collide!');
-  return true;
-}
 
 module.exports = Play;
