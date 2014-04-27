@@ -61,6 +61,10 @@ function detonationListener(blastCircle) {
       mole.kill();
     }
   }, this);
+
+  if (Phaser.Circle.intersectsRectangle(blastCircle, this.player.body)) {
+    this.player.knockback(blastCircle);
+  }
 }
 
 function fuckyeah() {

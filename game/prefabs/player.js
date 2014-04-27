@@ -28,6 +28,7 @@ var Player = function (game, x, y, frame) {
 
   this.body.collideWorldBounds = true;
   this.body.setSize(40, 30, 0, 10);
+  this.body.drag = new Phaser.Point(500, 500);
 
   this.bombCooldown = 1000; // only one bomb per second, no bomb spamming
   this.bombCooldownActive = false;
@@ -40,15 +41,15 @@ var Player = function (game, x, y, frame) {
   }
 };
 
+Player.OK = 'ok';
+Player.KNOCKEDBACK = 'knockedback';
+
 Player.prototype = Object.create(Phaser.Sprite.prototype);
 Player.prototype.constructor = Player;
 
 Player.prototype.update = function () {
 
   //this.game.debug.spriteBounds(this, 'rgba(255,0,0,.4)');
-
-  this.body.velocity.x = 0;
-  this.body.velocity.y = 0;
 
   // determine facing from mouse position
   this.angleToPointer = this.game.physics.arcade.angleToPointer(this, this.game.input.mousePointer);
@@ -86,6 +87,14 @@ Player.prototype.update = function () {
     this.frame = 12;
   }
 };
+
+Player.prototype.knockback = function (blastCircle) {
+  this.status = Player.KNOCKEDBACK;
+  var radians = this.game.physics.arcade.angleBetween(blastCircle, this);
+  var velocity = this.game.physics.arcade.velocityFromRotation(radians, 600);
+  this.body.velocity.x = velocity.x;
+  this.body.velocity.y = velocity.y;
+}
 
 function onTimerTick() {
   this.bombCooldownActive = false;
