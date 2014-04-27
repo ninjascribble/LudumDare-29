@@ -4,19 +4,45 @@ var Player = require('../prefabs/player.js');
 var Bomb = require('../prefabs/bomb.js');
 
 'use strict';
-function Play() {
-  this.currentLevel = 0;
-  this.timeRemaining = 30;
-}
-
-function calculatePos(i, n, length) {
-  var result = (i / n) * length - (length / n * .5);
-  return result;
-}
+function Play() {}
 
 Play.prototype = {
 
+  /**
+  * Override this method to add some load operations.
+  * If you need to use the loader, you may need to use them here.
+  *
+  * @method Phaser.State#preload
+  */
+  preload: function () {
+  },
+
+  /**
+  * Put update logic here.
+  *
+  * @method Phaser.State#loadUpdate
+  */
+  loadUpdate: function () {
+  },
+
+  /**
+  * Put render operations here.
+  *
+  * @method Phaser.State#loadRender
+  */
+  loadRender: function () {
+  },
+
+  /**
+  * This method is called after the game engine successfully switches states.
+  * Feel free to add any setup code here (do not load anything here, override preload() instead).
+  *
+  * @method Phaser.State#create
+  */
   create: function () {
+
+    this.currentLevel = 0;
+    this.timeRemaining = 30;
 
     this.hud = new Hud(this.game);
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -26,6 +52,11 @@ Play.prototype = {
     this.buildLevel(this.currentLevel);
   },
 
+  /**
+  * Put update logic here.
+  *
+  * @method Phaser.State#update
+  */
   update: function () {
     
     this.hud.setTime(this.timeRemaining);
@@ -39,8 +70,28 @@ Play.prototype = {
     }
   },
 
+  /**
+  * Put render operations here.
+  *
+  * @method Phaser.State#render
+  */
   render: function () {
+  },
 
+  /**
+  * This method will be called when game paused.
+  *
+  * @method Phaser.State#paused
+  */
+  paused: function () {
+  },
+
+  /**
+  * This method will be called when the state is shut down (i.e. you switch to another state from this one).
+  * @method Phaser.State#shutdown
+  */
+  shutdown: function() {
+    this.hud.destroy();
   },
 
   buildLevel: function(level) {
@@ -49,7 +100,7 @@ Play.prototype = {
     var level = levels[this.currentLevel];
 
     if (!level) {
-      return this.game.state.start('gameover');
+      return this.game.state.start('youwin');
     }
 
     var background = level.stage.background;
@@ -72,8 +123,6 @@ Play.prototype = {
     this.game.sound.add('explosion1');
     this.game.sound.add('explosion2');
     this.game.sound.add('explosion3');
-
-    // this.game.world.bringToTop(this.hud);
   }
 };
 
@@ -94,7 +143,7 @@ function onTimerTick() {
 
   this.timeRemaining--;
 
-  if (this.timeRemaining <= 0) {
+  if (this.timeRemaining < 0) {
     this.game.state.start('gameover');
   }
 }

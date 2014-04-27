@@ -1,8 +1,8 @@
 
 'use strict';
-function GameOver() {}
+function YouWin() {}
 
-GameOver.prototype = {
+YouWin.prototype = {
 
   preload: function () {
 
@@ -10,7 +10,7 @@ GameOver.prototype = {
 
   create: function () {
 
-    this.titleText = this.game.add.bitmapText(this.game.world.centerX, 300, '8bit-light', 'The Moles Have Won!', 32);
+    this.titleText = this.game.add.bitmapText(this.game.world.centerX, 300, '8bit-light', 'You Won!', 48);
     this.titleText.updateTransform();
     this.titleText.x = this.game.width / 2 - this.titleText.textWidth / 2;
     this.titleText.y = 200;
@@ -27,4 +27,4 @@ GameOver.prototype = {
     }
   }
 };
-module.exports = GameOver;
+module.exports = YouWin;
