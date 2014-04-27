@@ -19,6 +19,7 @@ var Mole = function(game, x, y, frame) {
 Mole.NEW = 'new';
 Mole.UP = 'up';
 Mole.DOWN = 'down';
+Mole.DEAD = 'dead';
 
 Mole.prototype = Object.create(Phaser.Sprite.prototype);
 Mole.prototype.constructor = Mole;
@@ -33,17 +34,27 @@ Mole.prototype.create = function() {
   this.frame = 0;
   this.revive();
 
-  this.game.time.events.add(this.initialDelay, appear, this);
+  this.appearEvent = this.game.time.events.add(this.initialDelay, appear, this);
+  this.oscillateEvent = null;
 }
 
 Mole.prototype.update = function() {
   //this.game.debug.spriteBounds(this);
 };
 
+Mole.prototype.kill = function() {
+  Phaser.Sprite.prototype.kill.call(this);
+  this.state = Mole.DEAD;
+  // this.exists = true;
+  this.visible = true;
+  this.animations.play('surrender');
+  this.game.time.events.remove(this.oscillateEvent);
+};
+
 function appear() {
   this.state = Mole.UP;
   this.animations.play('initial');
-  this.game.time.events.loop(this.frequency, oscillate, this);
+  this.oscillateEvent = this.game.time.events.loop(this.frequency, oscillate, this);
 }
 
 function oscillate() {
