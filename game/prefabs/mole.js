@@ -2,7 +2,7 @@
 
 var Mole = function(game, x, y, frame) {
 
-  Phaser.Sprite.call(this, game, x, y, 'mole', frame);
+  Phaser.Sprite.call(this, game, x, y, (this.spritesheet || 'mole'), frame);
 
   this.animations.add('initial', [0, 1, 2, 3, 4], 10);
   this.animations.add('popup', [1, 2, 3, 4], 10);
@@ -32,6 +32,9 @@ Mole.prototype.create = function() {
   this.initialDelay = Math.random() * 5000 + 1000;
   this.frequency = 2000;
   this.frame = 0;
+
+  // this.anchor.setTo(0, 0);
+  this.body.setSize(125, 45, 6, 20);
 
   this.appearEvent = this.game.time.events.add(this.initialDelay, appear, this);
   this.oscillateEvent = null;

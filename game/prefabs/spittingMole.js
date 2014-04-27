@@ -2,7 +2,10 @@
 var Mole = require('../prefabs/mole');
 
 var SpittingMole = function(game, x, y, frame) {
-  Mole.call(this, game, x, y, 'spittingMole', frame);
+
+  this.spritesheet = 'spitting-mole';
+
+  Mole.call(this, game, x, y, frame);
 
   // initialize your prefab here
   this.hasSpit = false;

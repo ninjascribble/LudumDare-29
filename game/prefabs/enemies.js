@@ -1,6 +1,7 @@
 'use strict';
 
 var Mole = require('../prefabs/mole');
+var SpittingMole = require('../prefabs/spittingMole');
 
 var Enemies = function(game) {
   Phaser.Group.call(this, game, game.world, 'enemies');
@@ -14,7 +15,7 @@ Enemies.prototype.create = function(type, x, y) {
   var enemy = this.getFirstExists(false)
 
   if (!enemy) {
-    enemy = new Mole(this.game, x, y);
+    enemy = new SpittingMole(this.game, x, y);
     this.add(enemy);
   }
   else {

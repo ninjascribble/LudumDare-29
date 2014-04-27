@@ -31,6 +31,7 @@ Preload.prototype = {
 
     // enemies
     this.load.spritesheet('mole', 'assets/enemies/mole-140.png', 140, 140);
+    this.load.spritesheet('spitting-mole', 'assets/enemies/spitting-mole-140.png', 140, 140);
 
     // fonts
     this.load.bitmapFont('8bit-light', 'assets/fonts/8bit_wonder-light.png', 'assets/fonts/8bit_wonder-light.fnt');
