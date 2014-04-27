@@ -22,4 +22,10 @@ Enemies.prototype.create = function(type, x, y) {
   }
 }
 
+Enemies.prototype.reset = function() {
+  this.setAllChildren('alive', false);
+  this.setAllChildren('visible', false);
+  this.setAllChildren('exists', false);
+}
+
 module.exports = Enemies;

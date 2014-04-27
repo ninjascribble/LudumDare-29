@@ -122,6 +122,7 @@ Play.prototype = {
     var player = level.player;
     var enemies = level.enemies;
 
+    this.enemies.reset();
     this.player.reset(player.x, player.y);
     this.game.world.bounds = new Phaser.Rectangle(bounds.x, bounds.y, bounds.width, bounds.height);
     
