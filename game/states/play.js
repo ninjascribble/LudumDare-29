@@ -70,9 +70,11 @@ Play.prototype = {
   update: function () {
 
     this.hud.setTime(this.timeRemaining);
+    this.hud.setHealth(this.player.health);
     this.game.physics.arcade.collide(this.player, this.enemies);
 
     if (this.enemies.countLiving() == 0) {
+      this.player.bombs.killAll();
       this.currentLevel++;
       this.buildLevel(this.currentLevel);
       this.timeRemaining += 30;
@@ -127,7 +129,7 @@ Play.prototype = {
     var enemies = level.enemies;
 
     this.enemies.reset();
-    this.player.reset(player.x, player.y);
+    this.player.reset(player.x, player.y, 3);
     this.game.world.bounds = new Phaser.Rectangle(bounds.x, bounds.y, bounds.width, bounds.height);
 
     this.background.loadTexture(background.name);

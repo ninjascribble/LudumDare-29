@@ -41,6 +41,7 @@ var Player = function (game, x, y, frame) {
   }
 
   this.status = Player.OK;
+  this.health = 3;
 };
 
 Player.OK = 'ok';
@@ -56,6 +57,10 @@ Player.prototype.getSpriteRect = function () {
 }
 
 Player.prototype.update = function () {
+  if (this.health < 1) {
+    this.game.state.start('gameover');
+  }
+
   switch (this.status) {
     case Player.OK:
       okUpdate.call(this);
@@ -66,14 +71,28 @@ Player.prototype.update = function () {
   }
 };
 
+Player.prototype.knockback = function (blastCircle) {
+  this.status = Player.KNOCKEDBACK;
+  var radians = this.game.physics.arcade.angleToXY(blastCircle, this.getSpriteRect().centerX, this.getSpriteRect().centerY);
+  var velocity = this.game.physics.arcade.velocityFromRotation(radians, 600);
+  this.body.velocity.x = velocity.x;
+  this.body.velocity.y = velocity.y;
+  this.frame = 12;
+  this.health--;
+
+  if (radians > -1.5 && radians < 1.5) {
+    this.scale.x = -1;
+  } else {
+    this.scale.x = 1;
+  }
+}
+
 function knockedbackUpdate() {
   // are we done being knocked back?
   if (this.body.velocity.x === 0 && this.body.velocity.y === 0) {
     this.status = Player.OK;
     return;
   }
-
-
 }
 
 function okUpdate() {
@@ -111,21 +130,6 @@ function okUpdate() {
   } else {
     this.animations.stop();
     this.frame = 12;
-  }
-}
-
-Player.prototype.knockback = function (blastCircle) {
-  this.status = Player.KNOCKEDBACK;
-  var radians = this.game.physics.arcade.angleToXY(blastCircle, this.getSpriteRect().centerX, this.getSpriteRect().centerY);
-  var velocity = this.game.physics.arcade.velocityFromRotation(radians, 600);
-  this.body.velocity.x = velocity.x;
-  this.body.velocity.y = velocity.y;
-  this.frame = 12;
-
-  if (radians > -1.5 && radians < 1.5) {
-    this.scale.x = -1;
-  } else {
-    this.scale.x = 1;
   }
 }
 
