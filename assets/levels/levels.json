@@ -6,6 +6,37 @@
 	},
 	"player": { "x": 250, "y": 250 },
 	"enemies": [
+		{ "name": "mole", "x": 533.3333333333333, "y": 300 }
+	]
+},
+{
+	"stage": {
+		"background": { "name": "bkg-farm", "x": 0, "y": 0 },
+		"foreground": { "name": "fence-foreground", "x": 0, "y": 520 },
+		"bounds": { "x": 0, "y": 0, "width": 800, "height": 600 }
+	},
+	"player": { "x": 250, "y": 250 },
+	"enemies": [
+		{ "name": "mole", "x": 666.6666666666666, "y": 100 },
+		{ "name": "mole", "x": 666.6666666666666, "y": 200 },
+		{ "name": "mole", "x": 666.6666666666666, "y": 300 },
+		{ "name": "mole", "x": 666.6666666666666, "y": 400 },
+		{ "name": "mole", "x": 666.6666666666666, "y": 500 },
+		{ "name": "mole", "x": 533.3333333333333, "y": 100 },
+		{ "name": "mole", "x": 533.3333333333333, "y": 200 },
+		{ "name": "mole", "x": 533.3333333333333, "y": 300 },
+		{ "name": "mole", "x": 533.3333333333333, "y": 400 },
+		{ "name": "mole", "x": 533.3333333333333, "y": 500 }
+	]
+},
+{
+	"stage": {
+		"background": { "name": "bkg-farm", "x": 0, "y": 0 },
+		"foreground": { "name": "fence-foreground", "x": 0, "y": 520 },
+		"bounds": { "x": 0, "y": 0, "width": 800, "height": 600 }
+	},
+	"player": { "x": 250, "y": 250 },
+	"enemies": [
 		{ "name": "mole", "x": 133.3333333333333, "y": 100 },
 		{ "name": "mole", "x": 133.3333333333333, "y": 300 },
 		{ "name": "mole", "x": 133.3333333333333, "y": 500 },

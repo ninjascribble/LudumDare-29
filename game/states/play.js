@@ -5,7 +5,8 @@ var Bomb = require('../prefabs/bomb.js');
 
 'use strict';
 function Play() {
-  this.currentLevel = 1;
+  this.currentLevel = 0;
+  this.timeRemaining = 30;
 }
 
 function calculatePos(i, n, length) {
@@ -16,14 +17,26 @@ function calculatePos(i, n, length) {
 Play.prototype = {
 
   create: function () {
-    this.game.physics.startSystem(Phaser.Physics.ARCADE);
-    this.buildLevel(this.currentLevel);
 
+    this.hud = new Hud(this.game);
+    this.game.physics.startSystem(Phaser.Physics.ARCADE);
+    this.game.time.events.loop(1000, onTimerTick, this);
     Bomb.onDetonation.add(detonationListener, this);
+
+    this.buildLevel(this.currentLevel);
   },
 
   update: function () {
+    
+    this.hud.setTime(this.timeRemaining);
     this.game.physics.arcade.collide(this.player, this.enemies);
+
+    if (this.enemies.countLiving() == 0) {
+      this.currentLevel++;
+      this.game.world.removeAll();
+      this.buildLevel(this.currentLevel);
+      this.timeRemaining += 30;
+    }
   },
 
   render: function () {
@@ -34,6 +47,11 @@ Play.prototype = {
 
     var levels = this.game.cache.getJSON('levels');
     var level = levels[this.currentLevel];
+
+    if (!level) {
+      return this.game.state.start('gameover');
+    }
+
     var background = level.stage.background;
     var foreground = level.stage.foreground;
     var bounds = level.stage.bounds;
@@ -55,11 +73,12 @@ Play.prototype = {
     this.game.sound.add('explosion2');
     this.game.sound.add('explosion3');
 
-    this.hud = new Hud(this.game);
+    // this.game.world.bringToTop(this.hud);
   }
 };
 
 function detonationListener(blastCircle) {
+
   this.enemies.forEachAlive(function (mole) {
     if (Phaser.Circle.intersectsRectangle(blastCircle, mole.body) && mole.state === Mole.UP) {
       mole.kill();
@@ -71,9 +90,13 @@ function detonationListener(blastCircle) {
   }
 }
 
-function fuckyeah() {
-  console.log('fuckin\' collide!');
-  return true;
+function onTimerTick() {
+
+  this.timeRemaining--;
+
+  if (this.timeRemaining <= 0) {
+    this.game.state.start('gameover');
+  }
 }
 
 module.exports = Play;

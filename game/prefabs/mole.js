@@ -45,7 +45,6 @@ Mole.prototype.update = function() {
 Mole.prototype.kill = function() {
   Phaser.Sprite.prototype.kill.call(this);
   this.state = Mole.DEAD;
-  // this.exists = true;
   this.visible = true;
   this.animations.play('surrender');
   this.game.time.events.remove(this.oscillateEvent);
