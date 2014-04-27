@@ -9,6 +9,8 @@ var Bomb = function (game, x, y, frame) {
   this.targetX = game.input.mousePointer.x;
   this.targetY = game.input.mousePointer.y;
   this.kill();
+  this.startPoint;
+  this.tweenIndex = 0;
 };
 
 Bomb.prototype = Object.create(Phaser.Sprite.prototype);
@@ -17,16 +19,33 @@ Bomb.prototype.constructor = Bomb;
 Bomb.prototype.update = function () {
   this.anchor.setTo(0.5, 0.5);
   this.animations.play('flash');
+
+  if (this.tweenData && this.tweenIndex === this.tweenData.length) {
+    this.tweenData = null;
+  }
+
+  if (this.tweenData) {
+    this.x = this.startPoint.x + this.tweenData[this.tweenIndex].x;
+    this.y = this.startPoint.y + this.tweenData[this.tweenIndex].y;
+  } else {
+    this.tweenIndex = 0;
+  }
+
+  this.tweenIndex++;
 };
 
 Bomb.prototype.throw = function (startX, startY) {
   this.reset(startX, startY);
-
+  this.startPoint = { x: startX, y: startY };
   var pointer = this.game.input.mousePointer;
   var destination = { x: pointer.x, y: pointer.y };
   var distance = Phaser.Point.distance(this, destination, true);
+  var data = { x: 0, y: 0 };
+  var finalDest = { x: destination.x - startX, y: destination.y - startY };
+  var tween = this.game.make.tween(data);
+  tween.to(finalDest, distance * 1.9, Phaser.Easing.Quadratic.Out, true);;
 
-  var tween = this.game.add.tween(this).to(destination, distance * 1.5, Phaser.Easing.Bounce.Out, true);
+  this.tweenData = tween.generateData(60);
 
   this.explodeTimer = this.game.time.events.add(1850, onTimerTick, this);
 }

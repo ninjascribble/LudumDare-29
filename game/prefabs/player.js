@@ -22,7 +22,7 @@ var Player = function (game, x, y, frame) {
   };
 
   //this.animations.add('walk', ['p1_walk01', 'p1_walk02', 'p1_walk03', 'p1_walk04', 'p1_walk05', 'p1_walk06', 'p1_walk07', 'p1_walk09', 'p1_walk10', 'p1_walk11', ], 12, true);
-  this.animations.add('walk', [0, 1, 2, 3], 12, true);
+  this.animations.add('walk', [0, 1, 2, 3], 9, true);
   this.anchor.setTo(0.5, .8);
   this.speed = 150;
 
@@ -59,8 +59,11 @@ Player.prototype.update = function () {
     this.scale.x = -1;
   }
 
+  function canThrowBomb() {
+      return this.game.input.mousePointer.isDown && !this.bombCooldownActive && this.bombs.countLiving() < this.maxActiveBombs;
+  }
   // throw a bomb but respect the cooldown and active bomb count
-  if (this.game.input.mousePointer.isDown && !this.bombCooldownActive && this.bombs.countLiving() < this.maxActiveBombs) {
+  if (canThrowBomb.call(this)) {
     this.bombCooldownActive = true;
     var bomb = this.bombs.getFirstDead();
     bomb.throw(this.body.x, this.body.y);
