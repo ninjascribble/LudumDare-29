@@ -134,7 +134,7 @@ function detonationListener(blastCircle) {
     }
   }, this);
 
-  if (Phaser.Circle.intersectsRectangle(blastCircle, this.player.body)) {
+  if (Phaser.Circle.intersectsRectangle(blastCircle, this.player.getSpriteRect())) {
     this.player.knockback(blastCircle);
   }
 }

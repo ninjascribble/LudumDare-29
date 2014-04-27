@@ -1,6 +1,12 @@
 // hack for phaser bug
 Phaser.Math.distanceRound = Phaser.Math.distanceRounded;
 
+Phaser.GameObjectCreator.prototype.tween = function (obj) {
+
+  return new Phaser.Tween(obj, this.game, this.game.tweens);
+
+}
+
 'use strict';
 function Preload() {
   this.asset = null;
