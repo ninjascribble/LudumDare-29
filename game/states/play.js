@@ -17,6 +17,7 @@ function calculatePos(i, n, length) {
 Play.prototype = {
   create: function () {
 
+    this.game.add.sprite(0, 0, 'bkg-farm');
     this.game.world.bounds = new Phaser.Rectangle(0, 0, this.game.width, this.game.height);
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -28,6 +29,8 @@ Play.prototype = {
     }
 
     this.player = new Player(this.game, this.game.width / 3, this.game.height / 3, 1);
+
+    this.game.add.sprite(0, 520, 'fence-foreground');
     this.hud = new Hud(this.game);
 
     this.game.sound.add('explosion1');

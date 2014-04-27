@@ -30,6 +30,10 @@ Preload.prototype = {
     // fonts
     this.load.bitmapFont('8bit-light', 'assets/fonts/8bit_wonder-light.png', 'assets/fonts/8bit_wonder-light.fnt');
 
+    // backgrounds
+    this.load.image('bkg-farm', 'assets/backgrounds/farm.png');
+    this.load.image('fence-foreground', 'assets/backgrounds/fence-foreground.png');
+
     // audio
     this.load.audio('explosion1', '../assets/audio/explosion1.wav', true);
     this.load.audio('explosion2', '../assets/audio/explosion2.wav', true);
