@@ -8,8 +8,11 @@ Menu.prototype = {
   },
   create: function() {
 
-    this.sprite = this.game.add.sprite(this.game.world.centerX, 138, 'walktest');
+    this.sprite = this.game.add.sprite(this.game.world.centerX * 1.5, 138, 'walkleft');
+    this.sprite2 = this.game.add.sprite(this.game.world.centerX * .5, 138, 'walkright');
+
     this.sprite.animations.add('walk', [0, 1, 2, 3], 12, true);
+    this.sprite2.animations.add('walk', [0, 1, 2, 3], 12, true);
     this.stage.disableVisibilityChange = true;
     //this.sprite.anchor.setTo(0.5, 0.7);
 
@@ -26,6 +29,7 @@ Menu.prototype = {
   },
   update: function () {
     this.sprite.animations.play('walk');
+    this.sprite2.animations.play('walk');
 
     //if(this.game.input.activePointer.justPressed()) {
     //  this.game.state.start('play');

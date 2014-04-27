@@ -18,6 +18,8 @@ Preload.prototype = {
     // player
     this.load.atlas('player', 'assets/player/playerOne.png', 'assets/player/playerOne.json');
     this.load.spritesheet('walktest', 'assets/player/walk-test-2.png', 147, 280);
+    this.load.spritesheet('walkleft', 'assets/player/walk-left-280.png', 152, 280);
+    this.load.spritesheet('walkright', 'assets/player/walk-right-280.png', 152, 280);
 
     // items
     this.load.spritesheet('bomb', 'assets/items/bomb.png', 70, 70);
