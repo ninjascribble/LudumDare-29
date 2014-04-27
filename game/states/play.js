@@ -14,7 +14,6 @@ function calculatePos(i, n, length) {
 }
 
 Play.prototype = {
-
   create: function () {
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
     this.buildLevel(this.currentLevel);
