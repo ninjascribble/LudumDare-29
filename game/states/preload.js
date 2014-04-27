@@ -38,6 +38,9 @@ Preload.prototype = {
     this.load.audio('explosion1', '../assets/audio/explosion1.wav', true);
     this.load.audio('explosion2', '../assets/audio/explosion2.wav', true);
     this.load.audio('explosion3', '../assets/audio/explosion3.wav', true);
+
+    // levels
+    this.load.json('levels', 'assets/levels/levels.json', true);
   },
   create: function () {
     this.asset.cropEnabled = false;
