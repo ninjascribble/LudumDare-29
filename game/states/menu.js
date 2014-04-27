@@ -10,7 +10,7 @@ Menu.prototype = {
 
     this.sprite = this.game.add.sprite(this.game.world.centerX, 138, 'walktest');
     this.sprite.animations.add('walk', [0, 1, 2, 3], 12, true);
-
+    this.stage.disableVisibilityChange = true;
     //this.sprite.anchor.setTo(0.5, 0.7);
 
     //this.titleText = this.game.add.bitmapText(this.game.world.centerX, 300, '8bit-light', 'Ludum Dare 29!', 48);
