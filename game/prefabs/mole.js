@@ -15,6 +15,7 @@ var Mole = function(game, x, y, frame) {
   this.animations.add('initial', [0, 1, 2, 3, 4], 10);
   this.animations.add('popup', [1, 2, 3, 4], 10);
   this.animations.add('popdown', [4, 3, 2, 1], 10);
+  this.animations.add('surrender', [5], 1);
 
   this.create();
 };
