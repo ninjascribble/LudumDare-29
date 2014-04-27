@@ -122,7 +122,7 @@ Player.prototype.knockback = function (blastCircle) {
   this.body.velocity.y = velocity.y;
   this.frame = 12;
 
-  if (radians > -1.5 && radians < 1.5) {ad
+  if (radians > -1.5 && radians < 1.5) {
     this.scale.x = -1;
   } else {
     this.scale.x = 1;

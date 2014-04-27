@@ -12,7 +12,7 @@ var Bomb = function (game, x, y, frame) {
   this.startPoint;
   this.tweenIndex = 0;
   this.maxDistance = 375;
-  this.blastRadius = 50;
+  this.blastRadius = 80;
 };
 
 Bomb.prototype = Object.create(Phaser.Sprite.prototype);

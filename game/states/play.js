@@ -85,10 +85,10 @@ Play.prototype = {
   * @method Phaser.State#render
   */
   render: function () {
-    this.game.debug.geom(this.player.getSpriteRect())
-    this.player.bombs.forEachDead(function (bomb) {
-      this.game.debug.geom(bomb.blastCircle);
-    }, this);
+    //this.game.debug.geom(this.player.getSpriteRect())
+    //this.player.bombs.forEachDead(function (bomb) {
+    //  this.game.debug.geom(bomb.blastCircle);
+    //}, this);
   },
 
   /**
