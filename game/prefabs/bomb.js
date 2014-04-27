@@ -11,6 +11,7 @@ var Bomb = function (game, x, y, frame) {
   this.kill();
   this.startPoint;
   this.tweenIndex = 0;
+  this.maxDistance = 375;
 };
 
 Bomb.prototype = Object.create(Phaser.Sprite.prototype);
@@ -31,6 +32,8 @@ Bomb.prototype.throw = function (startX, startY) {
   var destination;
   var data;
   var tween;
+  var distance;
+  var scale = 1;
 
   this.reset(startX, startY);
   this.startPoint = { x: startX, y: startY };
@@ -38,13 +41,21 @@ Bomb.prototype.throw = function (startX, startY) {
 
   data = { x: 0, y: 0 };
   destination = { x: this.game.input.mousePointer.x, y: this.game.input.mousePointer.y };
+  distance = Phaser.Point.distance(this, destination, true);
 
-  this.arcData.distance = Phaser.Point.distance(this, destination, true);
-  this.arcData.destination = { x: destination.x - startX, y: destination.y - startY };
+  if (distance > this.maxDistance) {
+    scale = this.maxDistance / distance;
+    this.arcData.distance = this.maxDistance;
+  } else {
+    this.arcData.distance = distance;
+  }
+
+  this.arcData.distance /= 2;
+  this.arcData.destination = { x: (destination.x - startX) * scale, y: (destination.y - startY) * scale };
   this.arcData.rotation = this.game.physics.arcade.angleBetween(data, this.arcData.destination);
 
   tween = this.game.make.tween(data);
-  tween.to(this.arcData.destination, this.arcData.distance * 1.9, Phaser.Easing.Linear.In, true);;
+  tween.to(this.arcData.destination, this.arcData.distance * 1.9, null, true);;
 
   this.tweenData = tween.generateData(60);
   this.explodeTimer = this.game.time.events.add(this.getLifespan(), onTimerTick, this);
