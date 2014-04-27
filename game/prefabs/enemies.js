@@ -1,7 +1,7 @@
 'use strict';
 
 var Mole = require('../prefabs/mole');
-var SpittingMole = require('../prefabs/spittingMole');
+var SpittingMole = require('../prefabs/spittingmole');
 
 var Enemies = function(game) {
   Phaser.Group.call(this, game, game.world, 'enemies');

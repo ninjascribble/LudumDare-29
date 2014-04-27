@@ -21,11 +21,18 @@ SpittingMole.prototype.update = function() {
   if (this.state === Mole.UP) {
     // spit!
     this.hasSpit = true;
+    this.spitEvent = this.game.time.events.add(500, this.spit, this);
   }
 
   if (this.state === Mole.DOWN) {
     this.hasSpit = false;
   }
 };
+
+SpittingMole.prototype.spit = function () {
+  this.game.time.events.remove(this.spitEvent);
+
+
+}
 
 module.exports = SpittingMole;

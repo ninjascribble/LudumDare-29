@@ -73,6 +73,9 @@ Play.prototype = {
     this.hud.setHealth(this.player.health);
     this.game.physics.arcade.collide(this.player, this.enemies);
 
+    this.game.playerX = this.player.body.x;
+    this.game.playerY = this.player.body.y;
+
     if (this.enemies.countLiving() == 0) {
       this.currentLevel++;
       this.buildLevel(this.currentLevel);
