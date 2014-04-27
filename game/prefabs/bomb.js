@@ -65,7 +65,6 @@ function arcTween() {
       //var arcX = this.arcData.distance - (this.arcData.distance / 2);
       var arcX = (this.arcData.distance * (this.tweenIndex / this.tweenData.length)) - (this.arcData.distance / 2);
       var yAdjust = Math.abs(arcX) - (this.arcData.distance / 2);
-      console.log(yAdjust);
       this.x = this.startPoint.x + dataItem.x;
       this.y = this.startPoint.y + dataItem.y + yAdjust;
     }

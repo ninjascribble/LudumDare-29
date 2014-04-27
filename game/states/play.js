@@ -1,5 +1,5 @@
 var Hud = require('../prefabs/hud');
-var Mole = require('../prefabs/mole');
+var Enemies = require('../prefabs/enemies');
 var Player = require('../prefabs/player.js');
 var Bomb = require('../prefabs/bomb.js');
 
@@ -45,8 +45,18 @@ Play.prototype = {
     this.timeRemaining = 30;
 
     this.hud = new Hud(this.game);
+    this.enemies = new Enemies(this.game);
+    this.player = new Player(this.game, 0, 0, 1);
+
+    this.background = this.game.add.sprite(0, 0);
+    this.game.world.sendToBack(this.background);
+
+    this.foreground = this.game.add.sprite(0, 0);
+    this.game.world.bringToTop(this.foreground);
+
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
     this.game.time.events.loop(1000, onTimerTick, this);
+
     Bomb.onDetonation.add(detonationListener, this);
 
     this.buildLevel(this.currentLevel);
@@ -64,7 +74,6 @@ Play.prototype = {
 
     if (this.enemies.countLiving() == 0) {
       this.currentLevel++;
-      this.game.world.removeAll();
       this.buildLevel(this.currentLevel);
       this.timeRemaining += 30;
     }
@@ -92,6 +101,10 @@ Play.prototype = {
   */
   shutdown: function() {
     this.hud.destroy();
+    this.enemies.destroy();
+    this.player.destroy();
+    this.background.destroy();
+    this.foreground.destroy();
   },
 
   buildLevel: function(level) {
@@ -109,15 +122,19 @@ Play.prototype = {
     var player = level.player;
     var enemies = level.enemies;
 
+    this.player.reset(player.x, player.y);
     this.game.world.bounds = new Phaser.Rectangle(bounds.x, bounds.y, bounds.width, bounds.height);
+    
+    this.background.loadTexture(background.name);
+    this.background.x = background.x;
+    this.background.y = background.y;
 
-    this.game.add.sprite(background.x, background.y, background.name);
-    this.enemies = new Phaser.Group(this.game, this.game.world, 'enemies');
-    this.player = new Player(this.game, player.x, player.y, 1);
-    this.game.add.sprite(foreground.x, foreground.y, foreground.name);
+    this.foreground.loadTexture(foreground.name);
+    this.foreground.x = foreground.x;
+    this.foreground.y = foreground.y;
 
     for (var i = 0, len = enemies.length; i < len; i++) {
-        this.enemies.add(new Mole(this.game, enemies[i].x, enemies[i].y));
+        this.enemies.create(enemies[i].name, enemies[i].x, enemies[i].y);
     }
 
     this.game.sound.add('explosion1');
@@ -128,9 +145,9 @@ Play.prototype = {
 
 function detonationListener(blastCircle) {
 
-  this.enemies.forEachAlive(function (mole) {
-    if (Phaser.Circle.intersectsRectangle(blastCircle, mole.body) && mole.state === Mole.UP) {
-      mole.kill();
+  this.enemies.forEachAlive(function (enemy) {
+    if (Phaser.Circle.intersectsRectangle(blastCircle, enemy.body)) {
+      enemy.hit();
     }
   }, this);
 

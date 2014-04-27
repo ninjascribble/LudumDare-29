@@ -4,14 +4,15 @@ var Mole = function(game, x, y, frame) {
 
   Phaser.Sprite.call(this, game, x, y, 'mole', frame);
 
-  this.state = Mole.NEW;
-  this.initialDelay = Math.random() * 5000 + 1000;
-  this.frequency = 2000;
-
   this.animations.add('initial', [0, 1, 2, 3, 4], 10);
   this.animations.add('popup', [1, 2, 3, 4], 10);
   this.animations.add('popdown', [4, 3, 2, 1], 10);
   this.animations.add('surrender', [5], 1);
+
+  this.game.physics.arcade.enableBody(this);
+  this.anchor.setTo(0.5, 0.5);
+  this.body.immovable = true;
+  this.body.setSize(110, 110, 0, 15);
 
   this.create();
 };
@@ -26,13 +27,11 @@ Mole.prototype.constructor = Mole;
 
 Mole.prototype.create = function() {
 
-  this.game.physics.arcade.enableBody(this);
-  this.game.add.existing(this);
-  this.anchor.setTo(0.5, 0.5);
-  this.body.immovable = true;
-  this.body.setSize(110, 110, 0, 15);
-  this.frame = 0;
   this.revive();
+  this.state = Mole.NEW;
+  this.initialDelay = Math.random() * 5000 + 1000;
+  this.frequency = 2000;
+  this.frame = 0;
 
   this.appearEvent = this.game.time.events.add(this.initialDelay, appear, this);
   this.oscillateEvent = null;
@@ -42,12 +41,26 @@ Mole.prototype.update = function() {
   //this.game.debug.spriteBounds(this);
 };
 
+Mole.prototype.hit = function() {
+
+  if (this.state == Mole.UP) {
+    this.kill();
+  }
+};
+
 Mole.prototype.kill = function() {
   Phaser.Sprite.prototype.kill.call(this);
   this.state = Mole.DEAD;
   this.visible = true;
   this.animations.play('surrender');
   this.game.time.events.remove(this.oscillateEvent);
+};
+
+Mole.prototype.reset = function(x, y) {
+  Phaser.Sprite.prototype.reset.call(this, x, y);
+  this.game.time.events.remove(this.appearEvent);
+  this.game.time.events.remove(this.oscillateEvent);
+  this.create();
 };
 
 function appear() {
