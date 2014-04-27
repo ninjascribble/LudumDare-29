@@ -1,6 +1,7 @@
 var Hud = require('../prefabs/hud');
 var Mole = require('../prefabs/mole');
 var Player = require('../prefabs/player.js');
+var Bomb = require('../prefabs/bomb.js');
 
 'use strict';
 function Play() {
@@ -17,6 +18,8 @@ Play.prototype = {
   create: function () {
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
     this.buildLevel(this.currentLevel);
+
+    Bomb.onDetonation.add(detonationListener, this);
   },
 
   update: function () {
@@ -55,5 +58,22 @@ Play.prototype = {
     this.hud = new Hud(this.game);
   }
 };
+
+function detonationListener(blastCircle) {
+  this.enemies.forEachAlive(function (mole) {
+    if (Phaser.Circle.intersectsRectangle(blastCircle, mole.body) && mole.state === Mole.UP) {
+      mole.kill();
+    }
+  }, this);
+
+  if (Phaser.Circle.intersectsRectangle(blastCircle, this.player.body)) {
+    this.player.knockback(blastCircle);
+  }
+}
+
+function fuckyeah() {
+  console.log('fuckin\' collide!');
+  return true;
+}
 
 module.exports = Play;
