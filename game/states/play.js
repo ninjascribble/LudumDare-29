@@ -74,7 +74,6 @@ Play.prototype = {
     this.game.physics.arcade.collide(this.player, this.enemies);
 
     if (this.enemies.countLiving() == 0) {
-      this.player.bombs.killAll();
       this.currentLevel++;
       this.buildLevel(this.currentLevel);
       this.timeRemaining += 30;
