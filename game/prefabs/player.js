@@ -2,7 +2,7 @@
 var Bomb = require('../prefabs/bomb.js');
 
 var Player = function (game, x, y, frame) {
-  Phaser.Sprite.call(this, game, x, y, 'player', frame);
+  Phaser.Sprite.call(this, game, x, y, 'cyndi', frame);
   // initialize your prefab here
 
   this.game.add.existing(this);
@@ -21,15 +21,16 @@ var Player = function (game, x, y, frame) {
     right: game.input.keyboard.addKey(Phaser.Keyboard.RIGHT)
   };
 
-  this.animations.add('walk', ['p1_walk01', 'p1_walk02', 'p1_walk03', 'p1_walk04', 'p1_walk05', 'p1_walk06', 'p1_walk07', 'p1_walk09', 'p1_walk10', 'p1_walk11', ], 12, true);
+  //this.animations.add('walk', ['p1_walk01', 'p1_walk02', 'p1_walk03', 'p1_walk04', 'p1_walk05', 'p1_walk06', 'p1_walk07', 'p1_walk09', 'p1_walk10', 'p1_walk11', ], 12, true);
+  this.animations.add('walk', [0, 1, 2, 3], 12, true);
   this.anchor.setTo(0.5, .8);
   this.speed = 150;
-  
+
   this.body.collideWorldBounds = true;
   this.body.setSize(40, 30, 0, 10);
-  
+
   this.bombCooldown = 1000; // only one bomb per second, no bomb spamming
-  this.bombCooldownActive = false; 
+  this.bombCooldownActive = false;
   this.bombs = game.add.group(); // how many bombs are in the world
   this.maxActiveBombs = 2; // how many bombs can coexist at one time
 
