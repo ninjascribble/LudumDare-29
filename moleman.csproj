@@ -82,6 +82,8 @@
     <None Include="assets\player\playerOne.json" />
     <Content Include="assets\player\playerOne.png" />
     <Content Include="assets\player\walk-left-280.png" />
+    <Content Include="assets\player\walk-right-140.png" />
+    <Content Include="assets\player\walk-right-280.png" />
     <Content Include="assets\preloader.gif" />
     <Content Include="assets\yeoman-logo.png" />
     <Content Include="css\styles.css" />
