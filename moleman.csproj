@@ -90,14 +90,17 @@
     <Content Include="css\styles.css" />
     <Content Include="game\main.js" />
     <Content Include="game\prefabs\bomb.js" />
+    <Content Include="game\prefabs\enemies.js" />
     <Content Include="game\prefabs\hud.js" />
     <Content Include="game\prefabs\mole.js" />
     <Content Include="game\prefabs\player.js" />
+    <Content Include="game\prefabs\spittingMole.js" />
     <Content Include="game\states\boot.js" />
     <Content Include="game\states\gameover.js" />
     <Content Include="game\states\menu.js" />
     <Content Include="game\states\play.js" />
     <Content Include="game\states\preload.js" />
+    <Content Include="game\states\youwin.js" />
     <Content Include="Gruntfile.js" />
     <Content Include="index.html" />
     <Content Include="Web.config" />
