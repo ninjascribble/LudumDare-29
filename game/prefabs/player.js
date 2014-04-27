@@ -39,6 +39,8 @@ var Player = function (game, x, y, frame) {
     var bomb = new Bomb(this.game, this.body.x, this.body.y, 0);
     this.bombs.add(bomb);
   }
+
+  this.status = Player.OK;
 };
 
 Player.OK = 'ok';
@@ -48,13 +50,33 @@ Player.prototype = Object.create(Phaser.Sprite.prototype);
 Player.prototype.constructor = Player;
 
 Player.prototype.getSpriteRect = function () {
-  return new Phaser.Rectangle(this.x - (this.anchor.x * this.width), this.y - (this.anchor.y * this.height), this.width, this.height);
+  var width = Math.abs(this.width);
+  var retval = new Phaser.Rectangle(this.x - (this.anchor.x * width), this.y - (this.anchor.y * this.height), width, this.height);
+  return retval;
 }
 
 Player.prototype.update = function () {
+  switch (this.status) {
+    case Player.OK:
+      okUpdate.call(this);
+      break;
+    case Player.KNOCKEDBACK:
+      knockedbackUpdate.call(this);
+      break;
+  }
+};
 
-  //this.game.debug.spriteBounds(this, 'rgba(255,0,0,.4)');
+function knockedbackUpdate() {
+  // are we done being knocked back?
+  if (this.body.velocity.x === 0 && this.body.velocity.y === 0) {
+    this.status = Player.OK;
+    return;
+  }
 
+
+}
+
+function okUpdate() {
   // determine facing from mouse position
   this.angleToPointer = this.game.physics.arcade.angleToPointer(this, this.game.input.mousePointer);
   if (this.angleToPointer > -1.5 && this.angleToPointer < 1.5) {
@@ -63,9 +85,6 @@ Player.prototype.update = function () {
     this.scale.x = -1;
   }
 
-  function canThrowBomb() {
-    return this.game.input.mousePointer.isDown && !this.bombCooldownActive && this.bombs.countLiving() < this.maxActiveBombs;
-  }
   // throw a bomb but respect the cooldown and active bomb count
   if (canThrowBomb.call(this)) {
     this.bombCooldownActive = true;
@@ -93,14 +112,25 @@ Player.prototype.update = function () {
     this.animations.stop();
     this.frame = 12;
   }
-};
+}
 
 Player.prototype.knockback = function (blastCircle) {
   this.status = Player.KNOCKEDBACK;
-  var radians = this.game.physics.arcade.angleBetween(blastCircle, this.getSpriteRect());
+  var radians = this.game.physics.arcade.angleToXY(blastCircle, this.getSpriteRect().centerX, this.getSpriteRect().centerY);
   var velocity = this.game.physics.arcade.velocityFromRotation(radians, 600);
   this.body.velocity.x = velocity.x;
   this.body.velocity.y = velocity.y;
+  this.frame = 12;
+
+  if (radians > -1.5 && radians < 1.5) {ad
+    this.scale.x = -1;
+  } else {
+    this.scale.x = 1;
+  }
+}
+
+function canThrowBomb() {
+  return this.game.input.mousePointer.isDown && !this.bombCooldownActive && this.bombs.countLiving() < this.maxActiveBombs;
 }
 
 function onTimerTick() {

@@ -12,6 +12,7 @@ var Bomb = function (game, x, y, frame) {
   this.startPoint;
   this.tweenIndex = 0;
   this.maxDistance = 375;
+  this.blastRadius = 50;
 };
 
 Bomb.prototype = Object.create(Phaser.Sprite.prototype);
@@ -90,7 +91,7 @@ function onTimerTick() {
   var pointer = this.game.input.mousePointer;
   var emitter = this.game.add.emitter(0, 0, 100);
   var number = Math.floor(Math.random() * 3) + 1;
-  var blast = new Phaser.Circle(this.x, this.y, 100);
+  this.blastCircle = new Phaser.Circle(this.x, this.y, this.blastRadius * 2);
 
   this.game.sound.play('explosion' + number);
   emitter.makeParticles('fireball');
@@ -100,7 +101,7 @@ function onTimerTick() {
 
   emitter.start(true, 750, null, 10);
 
-  Bomb.onDetonation.dispatch(blast);
+  Bomb.onDetonation.dispatch(this.blastCircle);
 }
 
 module.exports = Bomb;

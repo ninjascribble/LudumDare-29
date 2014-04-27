@@ -4,7 +4,7 @@ var Player = require('../prefabs/player.js');
 var Bomb = require('../prefabs/bomb.js');
 
 'use strict';
-function Play() {}
+function Play() { }
 
 Play.prototype = {
 
@@ -68,7 +68,7 @@ Play.prototype = {
   * @method Phaser.State#update
   */
   update: function () {
-    
+
     this.hud.setTime(this.timeRemaining);
     this.game.physics.arcade.collide(this.player, this.enemies);
 
@@ -85,6 +85,10 @@ Play.prototype = {
   * @method Phaser.State#render
   */
   render: function () {
+    this.game.debug.geom(this.player.getSpriteRect())
+    this.player.bombs.forEachDead(function (bomb) {
+      this.game.debug.geom(bomb.blastCircle);
+    }, this);
   },
 
   /**
@@ -99,7 +103,7 @@ Play.prototype = {
   * This method will be called when the state is shut down (i.e. you switch to another state from this one).
   * @method Phaser.State#shutdown
   */
-  shutdown: function() {
+  shutdown: function () {
     this.hud.destroy();
     this.enemies.destroy();
     this.player.destroy();
@@ -107,7 +111,7 @@ Play.prototype = {
     this.foreground.destroy();
   },
 
-  buildLevel: function(level) {
+  buildLevel: function (level) {
 
     var levels = this.game.cache.getJSON('levels');
     var level = levels[this.currentLevel];
@@ -125,7 +129,7 @@ Play.prototype = {
     this.enemies.reset();
     this.player.reset(player.x, player.y);
     this.game.world.bounds = new Phaser.Rectangle(bounds.x, bounds.y, bounds.width, bounds.height);
-    
+
     this.background.loadTexture(background.name);
     this.background.x = background.x;
     this.background.y = background.y;
@@ -135,7 +139,7 @@ Play.prototype = {
     this.foreground.y = foreground.y;
 
     for (var i = 0, len = enemies.length; i < len; i++) {
-        this.enemies.create(enemies[i].name, enemies[i].x, enemies[i].y);
+      this.enemies.create(enemies[i].name, enemies[i].x, enemies[i].y);
     }
 
     this.game.sound.add('explosion1');
