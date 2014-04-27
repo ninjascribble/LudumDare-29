@@ -72,9 +72,9 @@ Play.prototype = {
     this.hud.setTime(this.timeRemaining);
     this.hud.setHealth(this.player.health);
     this.game.physics.arcade.collide(this.player, this.enemies);
-
-    this.game.playerX = this.player.body.x;
-    this.game.playerY = this.player.body.y;
+    var playerRect = this.player.getSpriteRect();
+    this.game.playerX = playerRect.centerX;
+    this.game.playerY = playerRect.centerY;
 
     if (this.enemies.countLiving() == 0) {
       this.currentLevel++;
