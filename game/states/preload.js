@@ -17,6 +17,7 @@ Preload.prototype = {
 
     // player
     this.load.atlas('player', 'assets/player/playerOne.png', 'assets/player/playerOne.json');
+    this.load.spritesheet('walktest', 'assets/player/walk-test.png', 663, 1266);
 
     // items
     this.load.spritesheet('bomb', 'assets/items/bomb.png', 70, 70);
@@ -41,7 +42,7 @@ Preload.prototype = {
   update: function () {
     if (!!this.ready) {
       //this.game.state.start('menu');
-      this.game.state.start('play');
+      this.game.state.start('menu');
     }
   },
 

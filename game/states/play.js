@@ -4,7 +4,6 @@ var Player = require('../prefabs/player.js');
 
 'use strict';
 function Play() {
-  this.moles = [];
   this.molesPerRow = 3;
   this.molesPerColumn = 3;
 }
@@ -16,6 +15,7 @@ function calculatePos(i, n, length) {
 
 Play.prototype = {
   create: function () {
+    this.moles = this.game.add.group();
 
     this.game.world.bounds = new Phaser.Rectangle(0, 0, this.game.width, this.game.height);
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -23,7 +23,7 @@ Play.prototype = {
     // Create a grid of moles
     for (var i = 0, len = this.molesPerRow; i < len; i++) {
       for (var j = 0, len = this.molesPerColumn; j < len; j++) {
-        this.moles.push(new Mole(this.game, calculatePos(i + 1, this.molesPerRow, this.game.width), calculatePos(j + 1, this.molesPerColumn, this.game.height)));
+        this.moles.add(new Mole(this.game, calculatePos(i + 1, this.molesPerRow, this.game.width), calculatePos(j + 1, this.molesPerColumn, this.game.height)));
       }
     }
 
