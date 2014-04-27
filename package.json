@@ -19,5 +19,9 @@
   },
   "engines": {
     "node": ">=0.8.0"
+  },
+  "scripts": {
+    "install": "echo install time; ./node_modules/bower/bin/bower install",
+    "postinstall": "echo postinstall time; ./node_modules/grunt/bin/grunt"
   }
 }
