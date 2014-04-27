@@ -34,7 +34,7 @@ Mole.prototype.create = function() {
 }
 
 Mole.prototype.update = function() {
-  this.game.debug.spriteBounds(this);
+  //this.game.debug.spriteBounds(this);
 };
 
 function appear() {

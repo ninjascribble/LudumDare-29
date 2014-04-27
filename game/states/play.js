@@ -29,6 +29,10 @@ Play.prototype = {
 
     this.player = new Player(this.game, this.game.width / 3, this.game.height / 3, 1);
     this.hud = new Hud(this.game);
+
+    this.game.sound.add('explosion1');
+    this.game.sound.add('explosion2');
+    this.game.sound.add('explosion3');
   },
 
   update: function () {

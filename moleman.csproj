@@ -57,6 +57,12 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\audio\explosion1.wav" />
+    <Content Include="assets\audio\explosion2.wav" />
+    <Content Include="assets\audio\explosion3.wav" />
+    <Content Include="assets\enemies\mole-140.png" />
+    <Content Include="assets\enemies\mole-280.png" />
+    <Content Include="assets\enemies\mole-70.png" />
     <Content Include="assets\enemies\mole.png" />
     <Content Include="assets\enemies\moleBlue_down.png" />
     <Content Include="assets\enemies\moleBlue_up.png" />
@@ -68,6 +74,7 @@
     <Content Include="assets\enemies\moleYellow_up.png" />
     <Content Include="assets\fonts\8bit_wonder-light.png" />
     <Content Include="assets\Items\bomb.png" />
+    <Content Include="assets\Items\fireball.png" />
     <Content Include="assets\Items\rock.png" />
     <Content Include="assets\fonts\8bit_wonder-light.fnt" />
     <None Include="assets\player\playerOne.json" />

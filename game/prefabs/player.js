@@ -44,7 +44,7 @@ Player.prototype.constructor = Player;
 
 Player.prototype.update = function () {
 
-  this.game.debug.spriteBounds(this, 'rgba(255,0,0,.4)');
+  //this.game.debug.spriteBounds(this, 'rgba(255,0,0,.4)');
 
   this.body.velocity.x = 0;
   this.body.velocity.y = 0;

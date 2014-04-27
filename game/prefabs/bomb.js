@@ -30,14 +30,29 @@ Bomb.prototype.throw = function (startX, startY) {
   this.y = startY;
   this.thrown = true;
   this.revive();
+
   var pointer = this.game.input.mousePointer;
-  var tween = this.game.add.tween(this).to({ x: pointer.x, y: pointer.y }, 1250, Phaser.Easing.Bounce.Out, true);
-  this.explodeTimer = this.game.time.events.add(3000, onTimerTick, this);
+  var destination = { x: pointer.x, y: pointer.y };
+  var distance = Phaser.Point.distance(this, destination, true);
+
+  var tween = this.game.add.tween(this).to(destination, distance * 1.5, Phaser.Easing.Bounce.Out, true);
+
+  this.explodeTimer = this.game.time.events.add(1850, onTimerTick, this);
 }
 
 function onTimerTick() {
   this.game.time.events.remove(this.explodeTimer);
   this.kill();
+  var pointer = this.game.input.mousePointer;
+  var emitter = this.game.add.emitter(0, 0, 100);
+  var number = Math.floor(Math.random() * 3) + 1;
+  this.game.sound.play('explosion' + number);
+  emitter.makeParticles('fireball');
+  emitter.x = this.x;
+  emitter.y = this.y;
+  emitter.setAlpha(1, 0, 600);
+
+  emitter.start(true, 750, null, 10);
 }
 
 module.exports = Bomb;
