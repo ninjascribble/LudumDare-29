@@ -20,9 +20,9 @@ GameOver.prototype = {
     else if (this.game.playerStats.loseByBomb) message = loseByBombMessage;
     else message = loseByTimeMessage;
 
-    this.scoreText = this.game.add.bitmapText(this.game.world.centerX, 350, '8bit-light', 'Score: ' + this.game.playerStats.score, 48);
-    this.scoreText.updateTransform();
-    this.scoreText.x = this.game.width / 2 - this.scoreText.textWidth / 2;
+    //this.scoreText = this.game.add.bitmapText(this.game.world.centerX, 350, '8bit-light', 'Score: ' + this.game.playerStats.score, 48);
+    //this.scoreText.updateTransform();
+    //this.scoreText.x = this.game.width / 2 - this.scoreText.textWidth / 2;
 
     this.titleText = this.game.add.bitmapText(this.game.world.centerX, 200, '8bit-light', 'The Moles Win', 48);
     this.titleText.updateTransform();
