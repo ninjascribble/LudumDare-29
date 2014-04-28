@@ -16,8 +16,6 @@ GameOver.prototype = {
 
     var message = '';
 
-    console.dir(this.game.playerStats);
-
     if (this.game.playerStats.loseBySpit) message = loseBySpitMessage;
     else if (this.game.playerStats.loseByBomb) message = loseByBombMessage;
     else message = loseByTimeMessage;
@@ -36,6 +34,7 @@ GameOver.prototype = {
   },
 
   update: function () {
+
     if(this.game.input.activePointer.justPressed()) {
       this.game.state.start('play');
     }

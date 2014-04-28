@@ -74,6 +74,14 @@ Play.prototype = {
     this.game.sound.add('explosion1');
     this.game.sound.add('explosion2');
     this.game.sound.add('explosion3');
+    
+    this.game.playerStats = {
+      hitBySpit: 0,
+      hitByBomb: 0,
+      loseByTime: false,
+      loseBySpit: false,
+      loseByBomb: false
+    };
   },
 
   /**
@@ -141,14 +149,6 @@ Play.prototype = {
     this.player.destroy();
     this.background.destroy();
     this.foreground.destroy();
-
-    this.game.playerStats = {
-      hitBySpit: 0,
-      hitByBomb: 0,
-      loseByTime: false,
-      loseBySpit: false,
-      loseByBomb: false
-    };
   },
 
   buildLevel: function (level) {
