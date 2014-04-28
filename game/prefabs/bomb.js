@@ -89,7 +89,7 @@ function onTimerTick() {
   this.game.time.events.remove(this.explodeTimer);
   this.kill();
   var pointer = this.game.input.mousePointer;
-  var emitter = this.game.add.emitter(0, 0, 100);
+  var emitter = this.game.add.emitter(0, 0, 200);
   var number = Math.floor(Math.random() * 3) + 1;
   this.blastCircle = new Phaser.Circle(this.x, this.y, this.blastRadius * 2);
 
@@ -97,9 +97,9 @@ function onTimerTick() {
   emitter.makeParticles('fireball');
   emitter.x = this.x;
   emitter.y = this.y;
-  emitter.setAlpha(1, 0, 600);
+  emitter.setAlpha(1, 0, 750);
 
-  emitter.start(true, 750, null, 10);
+  emitter.start(true, 1000, null, 10);
 
   Bomb.onDetonation.dispatch(this.blastCircle);
 }

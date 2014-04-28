@@ -16,7 +16,7 @@ var Mole = function(game, x, y, frame) {
 
   this.create();
 };
-
+ 
 Mole.NEW = 'new';
 Mole.UP = 'up';
 Mole.DOWN = 'down';
