@@ -63,7 +63,7 @@ Play.prototype = {
 
     this.game.spitGroup = this.game.add.group();
     for (var i = 0; i < 5; i++) {
-      var sprite = this.game.add.sprite(0, 0, 'fireball');
+      var sprite = this.game.add.sprite(0, 0, 'spit');
       this.game.physics.arcade.enable(sprite);
       sprite.kill();
       sprite.checkWorldBounds = true;

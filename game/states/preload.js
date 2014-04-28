@@ -28,6 +28,7 @@ Preload.prototype = {
     this.load.image('bombFlash', 'assets/items/bombFlash.png');
     this.load.image('rock', 'assets/items/rock.png');
     this.load.image('fireball', 'assets/items/fireball.png');
+    this.load.image('spit', 'assets/items/spit.png');
 
     // enemies
     this.load.spritesheet('mole', 'assets/enemies/mole-140.png', 140, 140);
