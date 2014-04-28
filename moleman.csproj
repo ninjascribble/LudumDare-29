@@ -75,6 +75,7 @@
     <Content Include="assets\enemies\moleYellow_down.png" />
     <Content Include="assets\enemies\moleYellow_up.png" />
     <Content Include="assets\fonts\8bit_wonder-light.png" />
+    <Content Include="assets\Items\bomb-70.png" />
     <Content Include="assets\Items\bomb.png" />
     <Content Include="assets\Items\fireball.png" />
     <Content Include="assets\Items\rock.png" />
