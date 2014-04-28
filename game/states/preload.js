@@ -51,7 +51,13 @@ Preload.prototype = {
   },
   create: function () {
     this.asset.cropEnabled = false;
-    this.game.playerStats = {};
+    this.game.playerStats = {
+      hitBySpit: 0,
+      hitByBomb: 0,
+      loseByTime: false,
+      loseBySpit: false,
+      loseByBomb: false
+    };
   },
   update: function () {
     if (!!this.ready) {

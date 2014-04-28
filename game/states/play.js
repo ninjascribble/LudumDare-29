@@ -87,6 +87,11 @@ Play.prototype = {
     this.game.spitGroup.forEachAlive(function (spit) {
       if (spit.overlap(this.player)) {
         this.player.knockback(spit);
+        this.game.playerStats.hitBySpit++;
+        if (this.player.health < 1) {
+          this.game.playerStats.loseBySpit = true;
+        }
+
         spit.kill();
       }
     }, this);
@@ -181,6 +186,11 @@ function detonationListener(blastCircle) {
 
   if (Phaser.Circle.intersectsRectangle(blastCircle, this.player.getSpriteRect())) {
     this.player.knockback(blastCircle);
+    if (this.player.health < 1) {
+      this.game.playerStats.loseBySpit = true;
+    }
+
+    this.game.playerStats.hitByBomb++;
   }
 }
 
@@ -190,6 +200,7 @@ function onTimerTick() {
 
   if (this.timeRemaining < 0) {
     this.game.state.start('gameover');
+    this.game.playerStats.loseByTime = true;
   }
 }
 
