@@ -187,7 +187,7 @@ function detonationListener(blastCircle) {
   if (Phaser.Circle.intersectsRectangle(blastCircle, this.player.getSpriteRect())) {
     this.player.knockback(blastCircle);
     if (this.player.health < 1) {
-      this.game.playerStats.loseBySpit = true;
+      this.game.playerStats.loseByBomb = true;
     }
 
     this.game.playerStats.hitByBomb++;
