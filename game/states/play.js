@@ -74,8 +74,9 @@ Play.prototype = {
     this.game.sound.add('explosion1');
     this.game.sound.add('explosion2');
     this.game.sound.add('explosion3');
-    
+
     this.game.playerStats = {
+      score: 0,
       hitBySpit: 0,
       hitByBomb: 0,
       loseByTime: false,
@@ -144,11 +145,14 @@ Play.prototype = {
   * @method Phaser.State#shutdown
   */
   shutdown: function () {
+
     this.hud.destroy();
     this.enemies.destroy();
     this.player.destroy();
     this.background.destroy();
     this.foreground.destroy();
+
+    this.game.playerStats.score = 1000 + (100 * this.timeRemaining) - (100 * this.game.playerStats.hitBySpit) - (200 * this.game.playerStats.hitByBomb);
   },
 
   buildLevel: function (level) {
