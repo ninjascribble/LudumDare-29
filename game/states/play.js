@@ -60,6 +60,16 @@ Play.prototype = {
     Bomb.onDetonation.add(detonationListener, this);
 
     this.buildLevel(this.currentLevel);
+
+    this.game.spitGroup = this.game.add.group();
+    for (var i = 0; i < 5; i++) {
+      var sprite = this.game.add.sprite(0, 0, 'fireball');
+      this.game.physics.arcade.enable(sprite);
+      sprite.kill();
+      sprite.checkWorldBounds = true;
+      sprite.outOfBoundsKill = true;
+      this.game.spitGroup.add(sprite);
+    }
   },
 
   /**
@@ -71,7 +81,16 @@ Play.prototype = {
 
     this.hud.setTime(this.timeRemaining);
     this.hud.setHealth(this.player.health);
+
     this.game.physics.arcade.collide(this.player, this.enemies);
+    //this.game.physics.arcade.collide(this.player, this.game.spitGroup);
+    this.game.spitGroup.forEachAlive(function (spit) {
+      if (spit.overlap(this.player)) {
+        this.player.knockback(spit);
+        spit.kill();
+      }
+    }, this);
+
     var playerRect = this.player.getSpriteRect();
     this.game.playerX = playerRect.centerX;
     this.game.playerY = playerRect.centerY;

@@ -33,13 +33,13 @@ SpittingMole.prototype.update = function () {
 function spit() {
   this.game.time.events.remove(this.spitEvent);
 
-  this.spit = this.game.add.sprite(this.x, this.y, 'fireball');
-  this.game.physics.arcade.enable(this.spit);
+  var spit = this.game.spitGroup.getFirstDead();
+  spit.reset(this.x, this.y);
   var radians = this.game.physics.arcade.angleToXY(this, this.game.playerX, this.game.playerY);
   var velocity = this.game.physics.arcade.velocityFromRotation(radians, this.spitVelocity);
 
-  this.spit.body.velocity.x = velocity.x;
-  this.spit.body.velocity.y = velocity.y;
+  spit.body.velocity.x = velocity.x;
+  spit.body.velocity.y = velocity.y;
 }
 
 module.exports = SpittingMole;
