@@ -19,6 +19,7 @@ var Player = function (game, x, y, frame) {
 
   //this.animations.add('walk', ['p1_walk01', 'p1_walk02', 'p1_walk03', 'p1_walk04', 'p1_walk05', 'p1_walk06', 'p1_walk07', 'p1_walk09', 'p1_walk10', 'p1_walk11', ], 12, true);
   this.animations.add('walk', [0, 1, 2, 3], 9, true);
+  this.animations.add('hit', [0, 4, 0, 4, 0, 4, 0], 15, true);
   this.anchor.setTo(0.5, .8);
   this.speed = 250;
 
@@ -78,6 +79,7 @@ Player.prototype.knockback = function (blastCircle) {
   this.body.velocity.y = velocity.y;
   this.frame = 12;
   this.health--;
+  this.animations.play('hit');
 
   if (radians > -1.5 && radians < 1.5) {
     this.scale.x = -1;
