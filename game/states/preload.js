@@ -31,6 +31,7 @@ Preload.prototype = {
 
     // enemies
     this.load.spritesheet('mole', 'assets/enemies/mole-140.png', 140, 140);
+    this.load.spritesheet('mole-280', 'assets/enemies/mole-280.png', 280, 280);
     this.load.spritesheet('spitting-mole', 'assets/enemies/spitting-mole-140.png', 140, 140);
 
     // fonts
@@ -53,8 +54,7 @@ Preload.prototype = {
   },
   update: function () {
     if (!!this.ready) {
-      //this.game.state.start('menu');
-      this.game.state.start('play');
+      this.game.state.start('menu');
     }
   },
 

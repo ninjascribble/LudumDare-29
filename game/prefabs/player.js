@@ -11,24 +11,20 @@ var Player = function (game, x, y, frame) {
   this.game.add.existing(this);
 
   this.cursors = {
-    // up: game.input.keyboard.addKey(Phaser.Keyboard.W),
-    // down: game.input.keyboard.addKey(Phaser.Keyboard.S),
-    // left: game.input.keyboard.addKey(Phaser.Keyboard.A),
-    // right: game.input.keyboard.addKey(Phaser.Keyboard.D)
-    up: game.input.keyboard.addKey(Phaser.Keyboard.UP),
-    down: game.input.keyboard.addKey(Phaser.Keyboard.DOWN),
-    left: game.input.keyboard.addKey(Phaser.Keyboard.LEFT),
-    right: game.input.keyboard.addKey(Phaser.Keyboard.RIGHT)
+    up: game.input.keyboard.addKey(Phaser.Keyboard.W),
+    down: game.input.keyboard.addKey(Phaser.Keyboard.S),
+    left: game.input.keyboard.addKey(Phaser.Keyboard.A),
+    right: game.input.keyboard.addKey(Phaser.Keyboard.D)
   };
 
   //this.animations.add('walk', ['p1_walk01', 'p1_walk02', 'p1_walk03', 'p1_walk04', 'p1_walk05', 'p1_walk06', 'p1_walk07', 'p1_walk09', 'p1_walk10', 'p1_walk11', ], 12, true);
   this.animations.add('walk', [0, 1, 2, 3], 9, true);
   this.anchor.setTo(0.5, .8);
-  this.speed = 150;
+  this.speed = 250;
 
   this.body.collideWorldBounds = true;
   this.body.setSize(40, 30, 0, 10);
-  this.body.drag = new Phaser.Point(500, 500);
+  this.body.drag = new Phaser.Point(1900, 1900);
 
   this.bombCooldown = 1000; // only one bomb per second, no bomb spamming
   this.bombCooldownActive = false;

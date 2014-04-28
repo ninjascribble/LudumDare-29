@@ -10,15 +10,22 @@ YouWin.prototype = {
 
   create: function () {
 
-    this.titleText = this.game.add.bitmapText(this.game.world.centerX, 300, '8bit-light', 'You Won!', 48);
+    this.background = this.game.add.sprite(0, 0, 'bkg-farm');
+    this.game.world.sendToBack(this.background);
+
+    this.sprite = this.game.add.sprite(this.game.world.centerX, 170, 'mole-280', 5);
+    this.sprite.anchor.setTo(0.5, 0.7);
+
+    this.foreground = this.game.add.sprite(0, 520, 'fence-foreground');
+    this.game.world.bringToTop(this.foreground);
+
+    this.titleText = this.game.add.bitmapText(this.game.world.centerX, 300, '8bit-light', 'You Win!', 48);
     this.titleText.updateTransform();
     this.titleText.x = this.game.width / 2 - this.titleText.textWidth / 2;
-    this.titleText.y = 200;
 
-    this.instructionText = this.game.add.bitmapText(this.game.world.centerX, 300, '8bit-light', '(Click to play again)', 24);
-    this.instructionText.updateTransform();
-    this.instructionText.x = this.game.width / 2 - this.instructionText.textWidth / 2;
-    this.instructionText.y = 400;
+    this.moveText = this.game.add.bitmapText(this.game.world.centerX, 375, '8bit-light', 'Click to play again', 16);
+    this.moveText.updateTransform();
+    this.moveText.x = this.game.width / 2 - this.moveText.textWidth / 2;
   },
 
   update: function () {
