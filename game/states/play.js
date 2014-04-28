@@ -98,7 +98,7 @@ Play.prototype = {
     if (this.enemies.countLiving() == 0) {
       this.currentLevel++;
       this.buildLevel(this.currentLevel);
-      this.timeRemaining += 30;
+      this.timeRemaining += 15;
     }
   },
 
