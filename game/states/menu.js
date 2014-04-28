@@ -19,7 +19,7 @@ Menu.prototype = {
     this.foreground = this.game.add.sprite(0, 520, 'fence-foreground');
     this.game.world.bringToTop(this.foreground);
 
-    this.titleText = this.game.add.bitmapText(this.game.world.centerX, 300, '8bit-light', 'Ludum Dare 29!', 48);
+    this.titleText = this.game.add.bitmapText(this.game.world.centerX, 300, '8bit-light', 'DARK MOLES!', 48);
     this.titleText.updateTransform();
     this.titleText.x = this.game.width / 2 - this.titleText.textWidth / 2;
 
