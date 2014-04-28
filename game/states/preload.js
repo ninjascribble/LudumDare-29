@@ -24,8 +24,8 @@ Preload.prototype = {
     this.load.spritesheet('cyndi', 'assets/player/walk-right-140.png', 76, 140);
 
     // items
-    this.load.spritesheet('bomb', 'assets/items/bomb.png', 70, 70);
-    this.load.image('bombFlash', 'assets/items/bombFlash.png');
+    this.load.spritesheet('bomb', 'assets/items/bomb-70.png', 70, 70);
+    //this.load.image('bombFlash', 'assets/items/bombFlash.png');
     this.load.image('rock', 'assets/items/rock.png');
     this.load.image('fireball', 'assets/items/fireball.png');
     this.load.image('spit', 'assets/items/spit.png');
@@ -52,6 +52,7 @@ Preload.prototype = {
   },
   create: function () {
     this.asset.cropEnabled = false;
+
     this.game.playerStats = {
       hitBySpit: 0,
       hitByBomb: 0,
