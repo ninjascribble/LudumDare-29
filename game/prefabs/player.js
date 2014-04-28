@@ -26,7 +26,6 @@ var Player = function (game, x, y, frame) {
   this.body.setSize(40, 30, 0, 10);
   this.body.drag = new Phaser.Point(1900, 1900);
 
-  this.bombCooldown = 1000; // only one bomb per second, no bomb spamming
   this.bombCooldownActive = false;
   this.bombs = game.add.group(); // how many bombs are in the world
   this.maxActiveBombs = 2; // how many bombs can coexist at one time
@@ -45,6 +44,10 @@ Player.KNOCKEDBACK = 'knockedback';
 
 Player.prototype = Object.create(Phaser.Sprite.prototype);
 Player.prototype.constructor = Player;
+
+Player.prototype.getBombCooldown = function () {
+  return 1000;
+}
 
 Player.prototype.getSpriteRect = function () {
   var width = Math.abs(this.width);
@@ -105,7 +108,7 @@ function okUpdate() {
     this.bombCooldownActive = true;
     var bomb = this.bombs.getFirstDead();
     bomb.throw(this.body.x, this.body.y);
-    this.bombCooldownEvent = this.game.time.events.add(this.bombCooldown, onTimerTick, this);
+    this.bombCooldownEvent = this.game.time.events.add(this.getBombCooldown(), onTimerTick, this);
   }
 
   if (this.cursors.up.isDown) {

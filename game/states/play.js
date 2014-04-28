@@ -63,7 +63,7 @@ Play.prototype = {
 
     this.game.spitGroup = this.game.add.group();
     for (var i = 0; i < 5; i++) {
-      var sprite = this.game.add.sprite(0, 0, 'fireball');
+      var sprite = this.game.add.sprite(0, 0, 'spit');
       this.game.physics.arcade.enable(sprite);
       sprite.kill();
       sprite.checkWorldBounds = true;
@@ -87,6 +87,11 @@ Play.prototype = {
     this.game.spitGroup.forEachAlive(function (spit) {
       if (spit.overlap(this.player)) {
         this.player.knockback(spit);
+        this.game.playerStats.hitBySpit++;
+        if (this.player.health < 1) {
+          this.game.playerStats.loseBySpit = true;
+        }
+
         spit.kill();
       }
     }, this);
@@ -98,7 +103,7 @@ Play.prototype = {
     if (this.enemies.countLiving() == 0) {
       this.currentLevel++;
       this.buildLevel(this.currentLevel);
-      this.timeRemaining += 30;
+      this.timeRemaining += 15;
     }
   },
 
@@ -181,6 +186,11 @@ function detonationListener(blastCircle) {
 
   if (Phaser.Circle.intersectsRectangle(blastCircle, this.player.getSpriteRect())) {
     this.player.knockback(blastCircle);
+    if (this.player.health < 1) {
+      this.game.playerStats.loseBySpit = true;
+    }
+
+    this.game.playerStats.hitByBomb++;
   }
 }
 
@@ -190,6 +200,7 @@ function onTimerTick() {
 
   if (this.timeRemaining < 0) {
     this.game.state.start('gameover');
+    this.game.playerStats.loseByTime = true;
   }
 }
 

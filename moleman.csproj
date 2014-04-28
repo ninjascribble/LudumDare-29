@@ -79,6 +79,7 @@
     <Content Include="assets\Items\fireball.png" />
     <Content Include="assets\Items\rock.png" />
     <Content Include="assets\fonts\8bit_wonder-light.fnt" />
+    <Content Include="assets\Items\spit.png" />
     <Content Include="assets\levels\levels.json" />
     <None Include="assets\player\playerOne.json" />
     <Content Include="assets\player\playerOne.png" />

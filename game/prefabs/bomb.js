@@ -20,7 +20,6 @@ Bomb.prototype.constructor = Bomb;
 
 Bomb.prototype.update = function () {
   this.anchor.setTo(0.5, 0.5);
-  this.animations.play('flash');
 
   arcTween.call(this);
 };
@@ -37,6 +36,7 @@ Bomb.prototype.throw = function (startX, startY) {
   var scale = 1;
 
   this.reset(startX, startY);
+  this.frame = 0;
   this.startPoint = { x: startX, y: startY };
   this.arcData = {};
 
@@ -59,10 +59,16 @@ Bomb.prototype.throw = function (startX, startY) {
   tween.to(this.arcData.destination, this.arcData.distance * 1.9, null, true);;
 
   this.tweenData = tween.generateData(60);
-  this.explodeTimer = this.game.time.events.add(this.getLifespan(), onTimerTick, this);
+  this.explodeTimer = this.game.time.events.add(this.getLifespan(), explode, this);
+  this.flashTimer = this.game.time.events.add(this.getLifespan() - 500, startFlash, this)
 }
 
 Bomb.onDetonation = new Phaser.Signal();
+
+function startFlash() {
+  this.game.time.events.remove(this.flashTimer);
+  this.animations.play('flash');
+}
 
 function arcTween() {
   var dataItem;
@@ -85,11 +91,12 @@ function arcTween() {
   }
 }
 
-function onTimerTick() {
+function explode() {
   this.game.time.events.remove(this.explodeTimer);
+  this.animations.stop('flash', true);
   this.kill();
   var pointer = this.game.input.mousePointer;
-  var emitter = this.game.add.emitter(0, 0, 100);
+  var emitter = this.game.add.emitter(0, 0, 200);
   var number = Math.floor(Math.random() * 3) + 1;
   this.blastCircle = new Phaser.Circle(this.x, this.y, this.blastRadius * 2);
 
@@ -97,9 +104,9 @@ function onTimerTick() {
   emitter.makeParticles('fireball');
   emitter.x = this.x;
   emitter.y = this.y;
-  emitter.setAlpha(1, 0, 600);
+  emitter.setAlpha(1, 0, 750);
 
-  emitter.start(true, 750, null, 10);
+  emitter.start(true, 1000, null, 10);
 
   Bomb.onDetonation.dispatch(this.blastCircle);
 }
