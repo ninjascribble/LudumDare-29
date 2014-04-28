@@ -20,19 +20,19 @@ GameOver.prototype = {
     else if (this.game.playerStats.loseByBomb) message = loseByBombMessage;
     else message = loseByTimeMessage;
 
-    this.scoreText = this.game.add.bitmapText(this.game.world.centerX, 175, '8bit-light', 'Score: ' + this.game.playerStats.score, 48);
+    this.scoreText = this.game.add.bitmapText(this.game.world.centerX, 350, '8bit-light', 'Score: ' + this.game.playerStats.score, 48);
     this.scoreText.updateTransform();
     this.scoreText.x = this.game.width / 2 - this.scoreText.textWidth / 2;
 
-    this.titleText = this.game.add.bitmapText(this.game.world.centerX, 275, '8bit-light', 'The Moles Win', 48);
+    this.titleText = this.game.add.bitmapText(this.game.world.centerX, 200, '8bit-light', 'The Moles Win', 48);
     this.titleText.updateTransform();
     this.titleText.x = this.game.width / 2 - this.titleText.textWidth / 2;
 
-    this.messageText = this.game.add.bitmapText(this.game.world.centerX, 332.5, '8bit-light', message, 24);
+    this.messageText = this.game.add.bitmapText(this.game.world.centerX, 257.5, '8bit-light', message, 24);
     this.messageText.updateTransform();
     this.messageText.x = this.game.width / 2 - this.messageText.textWidth / 2;
 
-    this.moveText = this.game.add.bitmapText(this.game.world.centerX, 375, '8bit-light', 'Click to play again', 16);
+    this.moveText = this.game.add.bitmapText(this.game.world.centerX, 300, '8bit-light', 'Click to play again', 16);
     this.moveText.updateTransform();
     this.moveText.x = this.game.width / 2 - this.moveText.textWidth / 2;
   },

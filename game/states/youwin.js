@@ -19,7 +19,7 @@ YouWin.prototype = {
     this.foreground = this.game.add.sprite(0, 520, 'fence-foreground');
     this.game.world.bringToTop(this.foreground);
 
-    this.scoreText = this.game.add.bitmapText(this.game.world.centerX, 175, '8bit-light', 'Score: ' + this.game.playerStats.score, 48);
+    this.scoreText = this.game.add.bitmapText(this.game.world.centerX, 425, '8bit-light', 'Score: ' + this.game.playerStats.score, 48);
     this.scoreText.updateTransform();
     this.scoreText.x = this.game.width / 2 - this.scoreText.textWidth / 2;
 
