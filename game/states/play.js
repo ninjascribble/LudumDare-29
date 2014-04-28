@@ -70,6 +70,10 @@ Play.prototype = {
       sprite.outOfBoundsKill = true;
       this.game.spitGroup.add(sprite);
     }
+
+    this.game.sound.add('explosion1');
+    this.game.sound.add('explosion2');
+    this.game.sound.add('explosion3');
   },
 
   /**
@@ -137,6 +141,14 @@ Play.prototype = {
     this.player.destroy();
     this.background.destroy();
     this.foreground.destroy();
+
+    this.game.playerStats = {
+      hitBySpit: 0,
+      hitByBomb: 0,
+      loseByTime: false,
+      loseBySpit: false,
+      loseByBomb: false
+    };
   },
 
   buildLevel: function (level) {
@@ -169,10 +181,6 @@ Play.prototype = {
     for (var i = 0, len = enemies.length; i < len; i++) {
       this.enemies.create(enemies[i].name, enemies[i].x, enemies[i].y);
     }
-
-    this.game.sound.add('explosion1');
-    this.game.sound.add('explosion2');
-    this.game.sound.add('explosion3');
   }
 };
 

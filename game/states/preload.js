@@ -52,6 +52,7 @@ Preload.prototype = {
   },
   create: function () {
     this.asset.cropEnabled = false;
+
     this.game.playerStats = {
       hitBySpit: 0,
       hitByBomb: 0,
