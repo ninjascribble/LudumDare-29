@@ -17,6 +17,13 @@ var Player = function (game, x, y, frame) {
     right: game.input.keyboard.addKey(Phaser.Keyboard.D)
   };
 
+  this.altCursors = {
+    up: game.input.keyboard.addKey(Phaser.Keyboard.UP),
+    down: game.input.keyboard.addKey(Phaser.Keyboard.DOWN),
+    left: game.input.keyboard.addKey(Phaser.Keyboard.LEFT),
+    right: game.input.keyboard.addKey(Phaser.Keyboard.RIGHT)
+  };
+
   //this.animations.add('walk', ['p1_walk01', 'p1_walk02', 'p1_walk03', 'p1_walk04', 'p1_walk05', 'p1_walk06', 'p1_walk07', 'p1_walk09', 'p1_walk10', 'p1_walk11', ], 12, true);
   this.animations.add('walk', [0, 1, 2, 3], 9, true);
   this.animations.add('hit', [0, 4, 0, 4, 0, 4, 0], 15, true);
@@ -113,16 +120,16 @@ function okUpdate() {
     this.bombCooldownEvent = this.game.time.events.add(this.getBombCooldown(), onTimerTick, this);
   }
 
-  if (this.cursors.up.isDown) {
+  if (this.cursors.up.isDown || this.altCursors.up.isDown) {
     this.body.velocity.y = -this.speed;
   }
-  if (this.cursors.down.isDown) {
+  if (this.cursors.down.isDown || this.altCursors.down.isDown) {
     this.body.velocity.y = this.speed;
   }
-  if (this.cursors.left.isDown) {
+  if (this.cursors.left.isDown || this.altCursors.left.isDown) {
     this.body.velocity.x = -this.speed;
   }
-  if (this.cursors.right.isDown) {
+  if (this.cursors.right.isDown || this.altCursors.right.isDown) {
     this.body.velocity.x = this.speed;
   }
 

@@ -23,7 +23,7 @@ Menu.prototype = {
     this.titleText.updateTransform();
     this.titleText.x = this.game.width / 2 - this.titleText.textWidth / 2;
 
-    this.moveText = this.game.add.bitmapText(this.game.world.centerX, 375, '8bit-light', 'WASD to move', 16);
+    this.moveText = this.game.add.bitmapText(this.game.world.centerX, 375, '8bit-light', 'WASD or arrows to move', 16);
     this.moveText.updateTransform();
     this.moveText.x = this.game.width / 2 - this.moveText.textWidth / 2;
 
